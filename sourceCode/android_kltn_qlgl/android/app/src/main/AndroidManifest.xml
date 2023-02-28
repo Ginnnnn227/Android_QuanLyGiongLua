@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.android_kltn_qlgl">
    <application
-        android:label="android_kltn_qlgl"
+        android:label="QL Giống lúa"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
