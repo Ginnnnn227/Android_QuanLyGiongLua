@@ -8,3 +8,8 @@ git push origin master: dua code len branch master
 git branch branchname: tao branch
 git checkout branchname: di chuyen den branch
 git branch: kiem tra branck dang checkout
+
+XÓA THƯ MỤC TRÊN KHO GIT:
+git rm -r --cached FolderName
+git commit -m "Removed folder from repository"
+git push origin master
