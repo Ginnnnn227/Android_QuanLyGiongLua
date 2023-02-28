@@ -4,6 +4,7 @@ https://github.com/tanyen0103/filament-luagiong?fbclid=IwAR3SjV8KPJ9MvU8labllBn6
 Huong dan:
 git init: khoi tao git
 git clone linkhttps: lay code ve
+git push origin master: dua code len branch master
 git branch branchname: tao branch
 git checkout branchname: di chuyen den branch
 git branch: kiem tra branck dang checkout
