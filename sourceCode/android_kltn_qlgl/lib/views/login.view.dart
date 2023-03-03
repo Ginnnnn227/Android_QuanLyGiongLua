@@ -1,7 +1,9 @@
 import 'package:android_kltn_qlgl/utils/global.colors.dart';
+import 'package:android_kltn_qlgl/views/register.view.dart';
 import 'package:android_kltn_qlgl/widgets/button.global.dart';
 import 'package:android_kltn_qlgl/widgets/textform.global.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -18,7 +20,7 @@ class LoginPage extends StatelessWidget {
           child: SafeArea(
             child: Container(
               width: double.infinity,
-              padding: const EdgeInsets.all(30.0),
+              padding: const EdgeInsets.all(40.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -34,14 +36,14 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 100),
-                  Text(
-                    "Đăng nhập với tài khoản của bạn",
-                    style: TextStyle(
-                      color: GlobalColors.textColor,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  // Text(
+                  //   "Đăng nhập với tài khoản của bạn",
+                  //   style: TextStyle(
+                  //     color: GlobalColors.textColor,
+                  //     fontSize: 20,
+                  //     fontWeight: FontWeight.bold,
+                  //   ),
+                  // ),
                   const SizedBox(height: 40),
                   TextFormGlobal(
                     controller: usernameController,
@@ -68,28 +70,68 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 30),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width *0.6,
+                  Container(
+                    width: MediaQuery.of(context).size.width,
                     child: Row(
                       children: [
                         Expanded(
-                          child: Container(
-                            alignment: Alignment.center,
-                            height: 50,
-                            decoration: BoxDecoration(
+                          child: InkWell(
+                            onTap: () {
+                              debugPrint("Đăng nhập với Facebook");
+                            },
+                            child: Container(
+                              alignment: Alignment.center,
+                              height: 50,
+                              width: 30,
+                              decoration: BoxDecoration(
                                 color: Colors.white,
-                                borderRadius: BorderRadius.circular(20),
+                                borderRadius: BorderRadius.circular(30),
                                 boxShadow: [
                                   BoxShadow(
                                     color: Colors.black.withOpacity(0.3),
                                     blurRadius: 10,
-                                  )
-                                ]),
+                                  ),
+                                ],
+                              ),
+                              child: SvgPicture.asset(
+                                "assets/logos/facebook.svg",
+                                height: 35,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        Expanded(
+                          child: InkWell(
+                            onTap: () {
+                              debugPrint("Đăng nhập với Google");
+                            },
+                            child: Container(
+                              alignment: Alignment.center,
+                              height: 50,
+                              width: 30,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(30),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.3),
+                                    blurRadius: 10,
+                                  ),
+                                ],
+                              ),
+                              child: SvgPicture.asset(
+                                "assets/logos/google.svg",
+                                height: 35,
+                              ),
+                            ),
                           ),
                         ),
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -97,6 +139,7 @@ class LoginPage extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: Container(
+        padding: const EdgeInsets.only(bottom: 10),
         height: 50,
         color: Colors.white,
         alignment: Alignment.center,
@@ -112,12 +155,16 @@ class LoginPage extends StatelessWidget {
             InkWell(
               onTap: () {
                 debugPrint('Đăng ký thành công');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => RegisterPage()),
+                );
               },
               child: Text(
                 ' Đăng ký',
                 style: TextStyle(
                   color: GlobalColors.mainColor,
-                  fontSize: 16,
+                  fontSize: 18,
                 ),
               ),
             )
