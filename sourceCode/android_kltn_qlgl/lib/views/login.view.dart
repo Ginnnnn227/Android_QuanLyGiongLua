@@ -24,6 +24,7 @@ class LoginPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  //logo
                   Container(
                     alignment: Alignment.center,
                     child: Text(
@@ -45,20 +46,24 @@ class LoginPage extends StatelessWidget {
                   //   ),
                   // ),
                   const SizedBox(height: 40),
+                  // username textfield
                   TextFormGlobal(
                     controller: usernameController,
                     hintText: "Tên đăng nhập",
                     obscure: false,
                   ),
                   const SizedBox(height: 20),
+                  // password textfield
                   TextFormGlobal(
                     controller: passwordController,
                     hintText: "Mật khẩu",
                     obscure: true,
                   ),
                   const SizedBox(height: 30),
+                  // login button
                   const ButtonGlobal(),
                   const SizedBox(height: 60),
+                  // text login with
                   Container(
                     alignment: Alignment.center,
                     child: Text(
@@ -70,6 +75,7 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 30),
+                  // facebook & google mail
                   Container(
                     width: MediaQuery.of(context).size.width,
                     child: Row(
@@ -138,6 +144,7 @@ class LoginPage extends StatelessWidget {
           ),
         ),
       ),
+      // register hyperlink
       bottomNavigationBar: Container(
         padding: const EdgeInsets.only(bottom: 10),
         height: 50,
@@ -157,7 +164,7 @@ class LoginPage extends StatelessWidget {
                 debugPrint('Đăng ký thành công');
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => RegisterPage()),
+                  MaterialPageRoute(builder: (context) => const RegisterPage()),
                 );
               },
               child: Text(
