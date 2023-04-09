@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types, unnecessary_getters_setters
+
 class nhomgiongModel {
   int? _id;
   String? _nhomgiongCode;
@@ -16,7 +18,8 @@ class nhomgiongModel {
       String? nhomgiongNgayngam,
       String? nhomgiongNgaycay,
       String? createdAt,
-      String? updatedAt}) {
+      String? updatedAt
+      }) {
     if (id != null) {
       _id = id;
     }
@@ -65,15 +68,15 @@ class nhomgiongModel {
     _id = json['id'];
     _nhomgiongCode = json['nhomgiong_code'];
     _nhomgiongTen = json['nhomgiong_ten'];
-    _nhomgiongMota = json['nhomgiong_mota'];
-    _nhomgiongNgayngam = json['nhomgiong_ngayngam'];
-    _nhomgiongNgaycay = json['nhomgiong_ngaycay'];
+    _nhomgiongMota = json['nhomgiong_mota'] ?? 'Chưa cập nhật';
+    _nhomgiongNgayngam = json['nhomgiong_ngayngam']?? 'Chưa cập nhật';
+    _nhomgiongNgaycay = json['nhomgiong_ngaycay']?? 'Chưa cập nhật';
     _createdAt = json['created_at'];
     _updatedAt = json['updated_at'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = _id;
     data['nhomgiong_code'] = _nhomgiongCode;
     data['nhomgiong_ten'] = _nhomgiongTen;

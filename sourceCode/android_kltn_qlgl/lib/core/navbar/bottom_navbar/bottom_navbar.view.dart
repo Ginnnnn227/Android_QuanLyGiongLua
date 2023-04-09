@@ -1,11 +1,14 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:qlgl_project/core/navbar/bottom_navbar.controller.dart';
-import 'package:qlgl_project/core/routes.dart';
 import 'package:qlgl_project/core/views/home/home.view.dart';
 import 'package:qlgl_project/core/views/profile/profile.view.dart';
 
 import '../../constant/color.const.dart';
+import '../../controllers/kieuhinh_list.controller.dart';
+import '../../controllers/nhomgiong_list.controller.dart';
 
 class BottomNavbarView extends StatefulWidget {
   const BottomNavbarView({super.key});
@@ -15,11 +18,11 @@ class BottomNavbarView extends StatefulWidget {
 }
 
 class _BottomNavbarViewState extends State<BottomNavbarView> {
-  // final NGcontroller = Get.put(NhomGiongController());
   
   @override
   Widget build(BuildContext context) {
     BottomNavbarController controller = Get.find();
+
     return GetBuilder<BottomNavbarController>(
       builder: (context) {
         return Scaffold(
@@ -52,12 +55,12 @@ class _BottomNavbarViewState extends State<BottomNavbarView> {
             child: IndexedStack(
               index: controller.tabIndex,
               children: [
-                HomeView(),
+                const HomeView(),
                 Container(
                   color: Colors.blue,
-                  child: Text('OtherPage'),
+                  child: const Text('OtherPage'),
                 ),
-                ProfileView(),
+                const ProfileView(),
               ],
             ),
           ),
@@ -83,7 +86,7 @@ class _BottomNavbarViewState extends State<BottomNavbarView> {
   }
 
   //custom widget method appbar text
-  Text appbarText(String text) => Text(text, style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),);
+  Text appbarText(String text) => Text(text, style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold),);
 
   //custom widget bottomNavbarItem
   BottomNavigationBarItem BottomNavbarItem(BottomNavbarController controller,

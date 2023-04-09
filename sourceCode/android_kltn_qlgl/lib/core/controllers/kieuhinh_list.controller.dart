@@ -1,49 +1,48 @@
 import 'dart:async';
-import 'dart:core';
 
-import 'package:get/get.dart';
 import 'package:dio/dio.dart';
-//import 'package:http/http.dart' as http;
-import 'package:qlgl_project/core/constant/apiurl.const.dart';
-import 'package:qlgl_project/core/models/nhomgiong.model.dart';
+import 'package:get/get.dart';
 
-class NhomGiongListController extends GetxController {
+import '../constant/apiurl.const.dart';
+import '../models/kieuhinh.model.dart';
+
+class KieuHinhListController extends GetxController{
   RxBool isLoading = true.obs;
-  RxList<nhomgiongModel> data = RxList<nhomgiongModel>([]);
+  RxList<kieuhinhModel> data = RxList<kieuhinhModel>([]);
   RxString search = ''.obs;
 
-  List<nhomgiongModel> get filteredData {
+  List<kieuhinhModel> get filteredData {
     if (search.value.isEmpty) {
       return data.toList();
     } else {
       return data
-          .where((item) => item.nhomgiongTen!
+          .where((item) => item.kieuhinhTen!
               .toLowerCase()
               .contains(search.value.toLowerCase()))
           .toList();
     }
   }
 
-  List<nhomgiongModel> get allData {
+  List<kieuhinhModel> get allData {
     return data.toList();
   }
 
   Future<void> fetchData() async {
     try {
       final response = await Dio()
-          .get(nhomgiongURL)
+          .get(kieuhinhURL)
           .timeout(const Duration(seconds: 10), onTimeout: () {
         throw TimeoutException("Connect time out try again");
       });
       final List<dynamic> responseData = response.data['data'];
-      final List<nhomgiongModel> sorted =
-          responseData.map((post) => nhomgiongModel.fromJson(post)).toList();
-      sorted.sort((a, b) => a.nhomgiongTen!.compareTo(b.nhomgiongTen!));
+      final List<kieuhinhModel> sorted =
+          responseData.map((post) => kieuhinhModel.fromJson(post)).toList();
+      sorted.sort((a, b) => a.kieuhinhTen!.compareTo(b.kieuhinhTen!));
       data.value = sorted;
-      // final List<nhomgiongModel> list = [];
+      // final List<kieuhinhModel> list = [];
 
       // for (var item in responseData) {
-      //   final model = nhomgiongModel.fromJson(item);
+      //   final model = kieuhinhModel.fromJson(item);
       //   list.add(model);
       // }
 

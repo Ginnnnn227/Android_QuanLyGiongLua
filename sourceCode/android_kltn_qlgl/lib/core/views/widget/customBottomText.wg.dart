@@ -17,12 +17,12 @@ class BottomText extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Text(firsttext, style: TextStyle(color: kSecondaryColor, fontSize: 16)),
+        Text(firsttext, style: const TextStyle(color: kSecondaryColor, fontSize: 16)),
         GestureDetector(
           onTap: () => ontap(),
           child: Text(
             secondtext,
-            style: TextStyle(
+            style: const TextStyle(
                 color: Colors.blue, fontSize: 16, fontWeight: FontWeight.bold),
           ),
         ),

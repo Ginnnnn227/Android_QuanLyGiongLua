@@ -1,4 +1,6 @@
-import 'dart:math' as math;
+// ignore_for_file: non_constant_identifier_names
+
+
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,237 +12,292 @@ import 'package:qlgl_project/core/views/nhomgiong_list/nhomgiong_list.view.dart'
 import 'package:qlgl_project/core/views/widget/customDialog.wg.dart';
 import 'package:slide_digital_clock/slide_digital_clock.dart';
 
+import '../../controllers/giong_list.controller.dart';
+import '../../controllers/kieuhinh_list.controller.dart';
+import '../../controllers/nhomgiong_list.controller.dart';
+import '../../funtion.dart';
 import 'model/horicarditem.model.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
-
   @override
   State<HomeView> createState() => _HomeViewState();
 }
 
 class _HomeViewState extends State<HomeView> {
+  final NhomGiongListController NGlistController = Get.find();
+  final KieuHinhListController KHlistController = Get.find();
+  final GiongListController GlistController = Get.find();
+  var countNG;
+  var countKH;
+  var countG;
+  int countData(String title) {
+    switch (title) {
+      case "Nhóm giống":
+        return countNG;
+      case "Giống":
+        return countG;
+      case "Kiểu hình":
+        return countKH;
+      default:
+        return 0;
+    }
+  }
+
   List<HorizontalCardItem> HCItems = [
     HorizontalCardItem(
         title: 'Nhóm giống',
         funct: () {
           AppPages.routes;
-          Get.toNamed(AppPages.getNhomGiongList());
+          Get.to(AppPages.getNhomGiongList());
         }),
-    HorizontalCardItem(title: 'Giống', funct: () {}),
-    HorizontalCardItem(title: 'Kiểu hình', funct: () {}),
+    HorizontalCardItem(
+        title: 'Giống',
+        funct: () {
+          AppPages.routes;
+          Get.to(AppPages.getGiongList());
+        }),
+    HorizontalCardItem(
+        title: 'Kiểu hình',
+        funct: () {
+          AppPages.routes;
+          Get.to(AppPages.getKieuHinhList());
+        }),
   ];
-  int RandomColor() {
-    return (math.Random().nextDouble() * 0xFFFFFF).toInt();
-  }
-
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //   Timer.periodic(const Duration(seconds: 1), (timer) {
-  //     setState(() {
-  //       NGcontroller.fetchNhomGiong();
-  //     });
-  //   });
-  // }
-  // Future<void> _refresh() async {
-  //   // Add your refresh logic here, e.g. fetching data from an API
-  //   await Future.delayed(Duration(seconds: 1));
-  //   setState(() {
-  //     NGcontroller.fetchNhomGiong();
-  //   });
-  // }
 
   @override
+  void initState() {
+    super.initState();
+    setState(() {
+      NGlistController.fetchData();
+      KHlistController.fetchData();
+      GlistController.fetchData();
+      countNG = NGlistController.allData.length;
+      countKH = KHlistController.allData.length;
+      countG = GlistController.allData.length;
+      print("Số lượng nhóm giống: $countNG");
+      print("Số lượng kiểu hình: $countKH");
+      print("Số lượng kiểu hình: $countG");
+    });
+  }
+
+  
+  @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        // alignment: Alignment.center,
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 30),
-        // height: double.infinity,
-        width: double.infinity,
-        child: Column(
-          //mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            ListTile(
-              leading: Image.asset('assets/logo/profile.png'),
-              title: Text(
-                'Xin chào, Admin!',
-                style: TextStyle(
-                    fontWeight: FontWeight.w700, color: kPrimaryColor),
-              ),
-              subtitle: Text(
-                'Admin@gmail.com',
-                style: TextStyle(color: kSecondaryColor),
-              ),
-              trailing: GestureDetector(
-                onTap: () {
-                  ConfirmDialog(
-                    context,
-                    'Xác nhận',
-                    'Bạn chắc chắn muốn đăng xuất?',
-                    () {
-                      AppPages.routes;
-                      Get.offAndToNamed(AppPages.getLogin());
-                    },
-                    () {},
-                  ).show();
-                },
-                child: Icon(
-                  Icons.logout_outlined,
-                  color: secondaryDark,
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Container(
+          // alignment: Alignment.center,
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 30),
+          // height: double.infinity,
+          width: double.infinity,
+          child: Column(
+            //mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              ListTile(
+                leading: Image.asset('assets/logo/profile.png'),
+                title: const Text(
+                  'Xin chào, Admin!',
+                  style: TextStyle(
+                      fontWeight: FontWeight.w700, color: kPrimaryColor),
                 ),
+                subtitle: const Text(
+                  'Admin@gmail.com',
+                  style: TextStyle(color: kSecondaryColor),
+                ),
+                trailing: GestureDetector(
+                  onTap: () {
+                    ConfirmDialog(
+                      context,
+                      'Xác nhận',
+                      'Bạn chắc chắn muốn đăng xuất?',
+                      () {
+                        AppPages.routes;
+                        Get.offAndToNamed(AppPages.getLogin());
+                      },
+                      () {},
+                    ).show();
+                  },
+                  child: const Icon(
+                    Icons.logout_outlined,
+                    color: secondaryDark,
+                  ),
+                ),
+              ),
+              //clock and calendar
+              DateAndTime(),
+              SizedBox(
+                height: getProportionateScreenHeight(20),
+              ),
+              //Text Bộ giống lúa
+              const Padding(
+                padding: EdgeInsets.only(left: 15),
+                child: Text(
+                  'Bộ giống lúa',
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: kSecondaryColor),
+                ),
+              ),
+              SizedBox(
+                height: getProportionateScreenHeight(20),
+              ),
+              //horizontal card item
+              SizedBox(
+                height: 150,
+                //alignment: Alignment.center,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 3,
+                  itemBuilder: (context, index) =>
+                      buildHoriCard(item: HCItems[index]),
+                ),
+              ),
+              SizedBox(
+                height: getProportionateScreenHeight(20),
+              ),
+              const Padding(
+                padding: EdgeInsets.only(left: 15),
+                child: Text(
+                  'Danh mục khác',
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: kSecondaryColor),
+                ),
+              ),
+              SizedBox(
+                height: getProportionateScreenHeight(20),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+//widget build Clock and calendar
+  Widget DateAndTime() {
+    return Container(
+      width: double.maxFinite,
+      height: 150,
+      padding: EdgeInsets.symmetric(
+          vertical: SizeConfig.screenWidth * 0.03,
+          horizontal: SizeConfig.screenWidth * 0.02),
+      decoration: BoxDecoration(
+        color: kPrimaryColor,
+        borderRadius: BorderRadius.circular(30),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.grey,
+            offset: Offset(
+              5.0,
+              5.0,
+            ),
+            blurRadius: 5.0,
+            spreadRadius: 1.0,
+          ), //BoxShadow
+          BoxShadow(
+            color: Colors.white,
+            offset: Offset(0.0, 0.0),
+            blurRadius: 5.0,
+            spreadRadius: 0.0,
+          ),
+        ],
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: ClipRRect(
+              child: Image.asset(
+                DateTime.now().hour > 12
+                    ? 'assets/logo/pm.png'
+                    : 'assets/logo/am.png',
+                width: SizeConfig.screenWidth * 0.15,
+                fit: BoxFit.cover,
               ),
             ),
-            //clock and calendar
-            Align(
-              alignment: Alignment.center,
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 0),
-                height: SizeConfig.screenHeight * 0.15,
-                width: SizeConfig.screenWidth * 0.9,
-                decoration: BoxDecoration(
-                  color: kPrimaryColor,
-                  borderRadius: BorderRadius.circular(30),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      offset: const Offset(
-                        5.0,
-                        5.0,
-                      ),
-                      blurRadius: 5.0,
-                      spreadRadius: 1.0,
-                    ), //BoxShadow
-                    BoxShadow(
+          ),
+          const SizedBox(width: 15),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              //DIGITAL CLOCK
+              DigitalClock(
+                digitAnimationStyle: Curves.linearToEaseOut,
+                is24HourTimeFormat: false,
+                areaDecoration: const BoxDecoration(color: Colors.transparent),
+                colon: Text(
+                  ':',
+                  style: TextStyle(
+                      fontSize: SizeConfig.screenWidth * 0.08,
                       color: Colors.white,
-                      offset: const Offset(0.0, 0.0),
-                      blurRadius: 5.0,
-                      spreadRadius: 0.0,
-                    ),
-                  ],
+                      fontWeight: FontWeight.bold),
+                ),
+                amPmDigitTextStyle:
+                    const TextStyle(color: kPrimaryColor, fontSize: 0
+                        //fontSize: SizeConfig.screenWidth * 0.05,
+                        ),
+                hourMinuteDigitTextStyle: TextStyle(
+                  color: Colors.white,
+                  fontSize: SizeConfig.screenWidth * 0.08,
+                  fontWeight: FontWeight.w700,
+                ),
+                secondDigitTextStyle: TextStyle(
+                  color: Colors.white60,
+                  fontSize: SizeConfig.screenWidth * 0.06,
+                ),
+              ),
+              SizedBox(height: SizeConfig.screenWidth * 0.01),
+              Container(
+                height: 40,
+                padding: const EdgeInsets.symmetric(
+                  vertical: 8.0,
+                  horizontal: 8.0,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.white24,
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    //DIGITAL CLOCK
-                    DigitalClock(
-                      digitAnimationStyle: Curves.linearToEaseOut,
-                      is24HourTimeFormat: false,
-                      areaDecoration: BoxDecoration(color: Colors.transparent),
-                      colon: Text(
-                        ':',
+                    Image.asset(
+                      'assets/logo/calendar.png',
+                      width: SizeConfig.screenWidth * 0.06,
+                      fit: BoxFit.cover,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 5, right: 5),
+                      child: Text(
+                        "${weekday()},",
                         style: TextStyle(
-                            fontSize: SizeConfig.screenWidth * 0.08,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      amPmDigitTextStyle: TextStyle(
-                          color: secondaryDark,
-                          fontWeight: FontWeight.bold,
-                          fontSize: SizeConfig.screenWidth * 0.05),
-                      hourMinuteDigitTextStyle: TextStyle(
                           color: Colors.white,
-                          fontSize: SizeConfig.screenWidth * 0.08),
-                      secondDigitTextStyle: TextStyle(
-                          color: Colors.white60,
-                          fontSize: SizeConfig.screenWidth * 0.05),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 5.0),
-                      child: VerticalDivider(
-                        color: Colors.white,
-                        thickness: 3,
+                          fontSize: SizeConfig.screenWidth * 0.04,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
-                    // day & month
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 1),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            DateTime.now().day > 10
-                                ? DateTime.now().day.toString()
-                                : '0${DateTime.now().day.toString()}',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: SizeConfig.screenWidth * 0.05,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            'Tháng',
-                            style: TextStyle(
-                                color: secondaryDark,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            DateTime.now().month > 10
-                                ? DateTime.now().month.toString()
-                                : '0${DateTime.now().month.toString()}',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: SizeConfig.screenWidth * 0.05,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
+                    Text(
+                      "${numberCustom10(DateTime.now().day)} / ${numberCustom10(DateTime.now().month)} / ${DateTime.now().year}",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: SizeConfig.screenWidth * 0.04,
+                        fontWeight: FontWeight.w600,
                       ),
                     )
                   ],
                 ),
               ),
-            ),
-            SizedBox(
-              height: getProportionateScreenHeight(20),
-            ),
-            //Text Bộ giống lúa
-            const Padding(
-              padding: EdgeInsets.only(left: 15),
-              child: Text(
-                'Bộ giống lúa',
-                style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: kSecondaryColor),
-              ),
-            ),
-            SizedBox(
-              height: getProportionateScreenHeight(20),
-            ),
-            //horizontal card item
-            Container(
-              height: 150,
-              //alignment: Alignment.center,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 3,
-                itemBuilder: (context, index) =>
-                    buildHoriCard(item: HCItems[index]),
-              ),
-            ),
-            SizedBox(
-              height: getProportionateScreenHeight(20),
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 15),
-              child: Text(
-                'Danh mục khác',
-                style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: kSecondaryColor),
-              ),
-            ),
-            SizedBox(
-              height: getProportionateScreenHeight(20),
-            ),
-          ],
-        ),
+            ],
+          )
+        ],
       ),
     );
   }
@@ -248,9 +305,9 @@ class _HomeViewState extends State<HomeView> {
 //widget build horizontal card item
   Widget buildHoriCard({required HorizontalCardItem item}) {
     return GestureDetector(
-      onTap: () =>item.funct(),
+      onTap: () => item.funct(),
       child: Container(
-        padding: EdgeInsets.only(top: 5),
+        padding: const EdgeInsets.only(top: 5),
         alignment: Alignment.center,
         height: 160,
         width: 150,
@@ -262,13 +319,6 @@ class _HomeViewState extends State<HomeView> {
           children: <Widget>[
             Container(
               alignment: Alignment.center,
-              child: Text(
-                '00',
-                style: TextStyle(
-                    color: Color(RandomColor()).withOpacity(1.0),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25),
-              ),
               height: 100,
               width: 120,
               decoration: BoxDecoration(
@@ -278,27 +328,34 @@ class _HomeViewState extends State<HomeView> {
                   boxShadow: [
                     BoxShadow(
                       color: Colors.blueGrey.withOpacity(0.5),
-                      offset: Offset(
+                      offset: const Offset(
                         2.5,
                         2.5,
                       ),
                       blurRadius: 5.0,
                       spreadRadius: 1.0,
                     ),
-                    BoxShadow(
+                    const BoxShadow(
                       color: kPrimaryColor,
                       offset: Offset(0.0, 0.0),
                       blurRadius: 1.0,
                       spreadRadius: 0.0,
                     ),
                   ]),
+              child: Text(
+                numberCustom10(countData(item.title)),
+                style: TextStyle(
+                    color: Color(RandomColor()).withOpacity(1.0),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25),
+              ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 5,
             ),
             Text(
               item.title,
-              style: TextStyle(
+              style: const TextStyle(
                   color: secondaryDark,
                   fontWeight: FontWeight.bold,
                   fontSize: 18),

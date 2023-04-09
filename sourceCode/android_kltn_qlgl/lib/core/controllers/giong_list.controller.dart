@@ -1,49 +1,46 @@
 import 'dart:async';
-import 'dart:core';
 
-import 'package:get/get.dart';
 import 'package:dio/dio.dart';
-//import 'package:http/http.dart' as http;
-import 'package:qlgl_project/core/constant/apiurl.const.dart';
-import 'package:qlgl_project/core/models/nhomgiong.model.dart';
+import 'package:get/get.dart';
+import 'package:qlgl_project/core/models/giong.model.dart';
 
-class NhomGiongListController extends GetxController {
+import '../constant/apiurl.const.dart';
+
+class GiongListController extends GetxController{
   RxBool isLoading = true.obs;
-  RxList<nhomgiongModel> data = RxList<nhomgiongModel>([]);
+  RxList<giongModel> data = RxList<giongModel>([]);
   RxString search = ''.obs;
 
-  List<nhomgiongModel> get filteredData {
+  List<giongModel> get filteredData {
     if (search.value.isEmpty) {
       return data.toList();
     } else {
       return data
-          .where((item) => item.nhomgiongTen!
+          .where((item) => item.giongTen!
               .toLowerCase()
               .contains(search.value.toLowerCase()))
           .toList();
     }
   }
-
-  List<nhomgiongModel> get allData {
+  List<giongModel> get allData {
     return data.toList();
   }
-
   Future<void> fetchData() async {
     try {
       final response = await Dio()
-          .get(nhomgiongURL)
+          .get(giongURL)
           .timeout(const Duration(seconds: 10), onTimeout: () {
         throw TimeoutException("Connect time out try again");
       });
       final List<dynamic> responseData = response.data['data'];
-      final List<nhomgiongModel> sorted =
-          responseData.map((post) => nhomgiongModel.fromJson(post)).toList();
-      sorted.sort((a, b) => a.nhomgiongTen!.compareTo(b.nhomgiongTen!));
+      final List<giongModel> sorted =
+          responseData.map((post) => giongModel.fromJson(post)).toList();
+      sorted.sort((a, b) => a.giongTen!.compareTo(b.giongTen!));
       data.value = sorted;
-      // final List<nhomgiongModel> list = [];
+      // final List<kieuhinhModel> list = [];
 
       // for (var item in responseData) {
-      //   final model = nhomgiongModel.fromJson(item);
+      //   final model = kieuhinhModel.fromJson(item);
       //   list.add(model);
       // }
 
@@ -55,7 +52,6 @@ class NhomGiongListController extends GetxController {
     }
     update();
   }
-
   @override
   void onInit() {
     super.onInit();

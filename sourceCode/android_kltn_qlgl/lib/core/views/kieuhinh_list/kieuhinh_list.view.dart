@@ -1,42 +1,40 @@
-// ignore_for_file: non_constant_identifier_names
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:qlgl_project/core/constant/color.const.dart';
+import 'package:qlgl_project/core/controllers/kieuhinh_list.controller.dart';
 
-import '../../controllers/nhomgiong_list.controller.dart';
-import 'package:qlgl_project/core/models/nhomgiong.model.dart';
+import '../../constant/color.const.dart';
+import 'package:qlgl_project/core/models/kieuhinh.model.dart';
 
 import '../../funtion.dart';
-import '../../routes.dart';
 
-class NhomGiongListView extends StatefulWidget {
-  const NhomGiongListView({super.key});
+class KieuHinhListView extends StatefulWidget {
+  const KieuHinhListView({super.key});
 
   @override
-  State<NhomGiongListView> createState() => _NhomGiongListViewState();
+  State<KieuHinhListView> createState() => _KieuHinhListViewState();
 }
 
-class _NhomGiongListViewState extends State<NhomGiongListView> {
-  final NhomGiongListController NGlistController = Get.find();
+class _KieuHinhListViewState extends State<KieuHinhListView> {
+  final KieuHinhListController KHlistController = Get.find();
+
   @override
   void initState() {
     super.initState();
     setState(() {
-      NGlistController.fetchData();
-      NGlistController.search.value = '';
+      KHlistController.fetchData();
+      KHlistController.search.value = '';
     });
   }
 
   Future<void> _loadpage() async {
     setState(() {
-      NGlistController.fetchData();
-      NGlistController.search.value = '';
+      KHlistController.fetchData();
+      KHlistController.search.value = '';
     });
     Navigator.pushReplacement(
         context,
         PageRouteBuilder(
-            pageBuilder: (a, b, c) => const NhomGiongListView(),
+            pageBuilder: (a, b, c) => const KieuHinhListView(),
             transitionDuration: const Duration(seconds: 5)));
   }
 
@@ -48,7 +46,7 @@ class _NhomGiongListViewState extends State<NhomGiongListView> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'DANH SÁCH NHÓM GIỐNG',
+          'DANH SÁCH KIỂU HÌNH',
           style: TextStyle(fontWeight: FontWeight.w500, fontSize: 22),
         ),
         // actions: [
@@ -72,7 +70,7 @@ class _NhomGiongListViewState extends State<NhomGiongListView> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               child: TextField(
-                onChanged: (value) => NGlistController.search.value = value,
+                onChanged: (value) => KHlistController.search.value = value,
                 decoration: InputDecoration(
                   hintStyle: const TextStyle(fontSize: 20),
                   contentPadding: const EdgeInsets.symmetric(
@@ -92,7 +90,7 @@ class _NhomGiongListViewState extends State<NhomGiongListView> {
             ),
             Obx(() {
               return Text(
-                "Số lượng: ${numberCustom10(NGlistController.filteredData.length)}",
+                "Số lượng: ${numberCustom10(KHlistController.filteredData.length)}",
                 style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
@@ -101,17 +99,17 @@ class _NhomGiongListViewState extends State<NhomGiongListView> {
             }),
             Divider(),
             Obx(() {
-              if (NGlistController.isLoading.value) {
+              if (KHlistController.isLoading.value) {
                 return const Center(
                   child: CircularProgressIndicator(),
                 );
               } else {
                 return Expanded(
                   child: ListView.builder(
-                    itemCount: NGlistController.filteredData.length,
+                    itemCount: KHlistController.filteredData.length,
                     itemBuilder: (context, index) {
-                      final item = NGlistController.filteredData[index];
-                      return cardItemNG(index, item);
+                      final item = KHlistController.filteredData[index];
+                      return cardItemKH(index, item);
                     },
                   ),
                 );
@@ -123,7 +121,7 @@ class _NhomGiongListViewState extends State<NhomGiongListView> {
     );
   }
 
-  Widget cardItemNG(int index, nhomgiongModel item) {
+  Widget cardItemKH(int index, kieuhinhModel item) {
     return Card(
       child: ExpansionTile(
         textColor: kPrimaryColor,
@@ -136,7 +134,7 @@ class _NhomGiongListViewState extends State<NhomGiongListView> {
           ),
         ),
         title: Text(
-          "${item.nhomgiongTen}".toUpperCase(),
+          "${item.kieuhinhTen}".toUpperCase(),
           style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w500,
@@ -154,9 +152,6 @@ class _NhomGiongListViewState extends State<NhomGiongListView> {
             padding: const EdgeInsets.symmetric(horizontal: 30),
             child: Column(
               children: <Widget>[
-                cardRowItem('Code', '${item.nhomgiongCode}'),
-                cardRowItem('Ngày ngâm', '${item.nhomgiongNgayngam}'),
-                cardRowItem('Ngày cấy', '${item.nhomgiongNgaycay}'),
                 Text(
                   "Mô tả:",
                   style: const TextStyle(
@@ -166,10 +161,10 @@ class _NhomGiongListViewState extends State<NhomGiongListView> {
                   textAlign: TextAlign.left,
                 ),
                 Text(
-                  "${item.nhomgiongMota!}",
+                  "${item.kieuhinhMota!}",
                   style: TextStyle(
                       fontSize: 20,
-                      color: item.nhomgiongMota != 'Chưa cập nhật'
+                      color: item.kieuhinhMota != 'Chưa cập nhật'
                           ? Colors.black54
                           : Colors.red),
                   textAlign: TextAlign.justify,
@@ -182,22 +177,22 @@ class _NhomGiongListViewState extends State<NhomGiongListView> {
     );
   }
 
-  Widget cardRowItem(String title, String content) {
-    return Row(
-      children: [
-        Text(
-          "${title}: ",
-          style: const TextStyle(
-              fontSize: 20, fontWeight: FontWeight.w600, color: Colors.blue),
-        ),
-        Text(
-          content,
-          style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-              color: content != 'Chưa cập nhật' ? Colors.green : Colors.red),
-        ),
-      ],
-    );
-  }
+  // Widget cardRowItem(String title, String content) {
+  //   return Row(
+  //     children: [
+  //       Text(
+  //         title,
+  //         style: const TextStyle(
+  //             fontSize: 20, fontWeight: FontWeight.w600, color: Colors.blue),
+  //       ),
+  //       Text(
+  //         content,
+  //         style: TextStyle(
+  //             fontSize: 20,
+  //             fontWeight: FontWeight.w600,
+  //             color: content != 'Chưa cập nhật' ? Colors.green : Colors.red),
+  //       ),
+  //     ],
+  //   );
+  // }
 }

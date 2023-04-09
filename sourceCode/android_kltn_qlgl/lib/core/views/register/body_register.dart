@@ -17,7 +17,6 @@ class BodyRegister extends StatefulWidget {
 }
 
 class _BodyRegisterState extends State<BodyRegister> {
-  final _formkey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passController = TextEditingController();
   final nameController = TextEditingController();
@@ -49,7 +48,7 @@ class _BodyRegisterState extends State<BodyRegister> {
                     // ),
                     // SizedBox(height: getProportionateScreenHeight(10)),
                     Image(
-                      image: AssetImage('assets/logo/LogoAGU.png'),
+                      image: const AssetImage('assets/logo/LogoAGU.png'),
                       fit: BoxFit.cover,
                       width: getProportionateScreenWidth(80),
                     ),
@@ -65,7 +64,7 @@ class _BodyRegisterState extends State<BodyRegister> {
                         children: <Widget>[
                           //name input text
                           CustomTextFormField(
-                            Controller: nameController,
+                            controller: nameController,
                             label: 'Họ và tên',
                             hint: 'Nhập họ và tên',
                             pIcon: Icons.abc_outlined,
@@ -74,7 +73,7 @@ class _BodyRegisterState extends State<BodyRegister> {
                           SizedBox(height: getProportionateScreenHeight(25)),
                           //email input text
                           CustomTextFormField(
-                            Controller: emailController,
+                            controller: emailController,
                             label: 'Email',
                             hint: 'Nhập email',
                             pIcon: Icons.email_outlined,
@@ -83,7 +82,7 @@ class _BodyRegisterState extends State<BodyRegister> {
                           SizedBox(height: getProportionateScreenHeight(25)),
                           //password input text
                           CustomTextFormField(
-                            Controller: passController,
+                            controller: passController,
                             label: 'Mật khẩu',
                             hint: 'Nhập mật khẩu',
                             pIcon: Icons.key_outlined,
@@ -92,7 +91,7 @@ class _BodyRegisterState extends State<BodyRegister> {
                           SizedBox(height: getProportionateScreenHeight(25)),
                           //password input text
                           CustomTextFormField(
-                            Controller: confirmpassController,
+                            controller: confirmpassController,
                             label: 'Xác nhận mật khẩu',
                             hint: 'Nhập lại mật khẩu',
                             pIcon: Icons.key_outlined,
@@ -106,10 +105,10 @@ class _BodyRegisterState extends State<BodyRegister> {
                     ),
                     //forgotpassword
                     Row(
-                      children: <Widget>[
+                      children: const <Widget>[
                         Spacer(),
                         Padding(
-                          padding: const EdgeInsets.only(right: 15),
+                          padding: EdgeInsets.only(right: 15),
                           child: Text(
                             'Quên mật khẩu',
                             style: TextStyle(

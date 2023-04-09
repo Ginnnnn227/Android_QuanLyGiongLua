@@ -18,7 +18,6 @@ class BodyLogin extends StatefulWidget {
 }
 
 class _BodyLoginState extends State<BodyLogin> {
-  final _formkey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passController = TextEditingController();
   bool remember = false;
@@ -48,7 +47,7 @@ class _BodyLoginState extends State<BodyLogin> {
                     // ),
                     // SizedBox(height: getProportionateScreenHeight(10)),
                     Image(
-                      image: AssetImage('assets/logo/LogoAGU.png'),
+                      image: const AssetImage('assets/logo/LogoAGU.png'),
                       fit: BoxFit.cover,
                       width: getProportionateScreenWidth(80),
                     ),
@@ -64,7 +63,7 @@ class _BodyLoginState extends State<BodyLogin> {
                         children: <Widget>[
                           //email input text
                           CustomTextFormField(
-                            Controller: emailController,
+                            controller: emailController,
                             label: 'Email',
                             hint: 'Nhập email',
                             pIcon: Icons.email_outlined,
@@ -73,7 +72,7 @@ class _BodyLoginState extends State<BodyLogin> {
                           SizedBox(height: getProportionateScreenHeight(25)),
                           //password input text
                           CustomTextFormField(
-                            Controller: passController,
+                            controller: passController,
                             label: 'Mật khẩu',
                             hint: 'Nhập mật khẩu',
                             pIcon: Icons.key_outlined,
@@ -93,14 +92,14 @@ class _BodyLoginState extends State<BodyLogin> {
                             });
                           },
                         ),
-                        Text(
+                        const Text(
                           "Ghi nhớ",
                           style:
                               TextStyle(color: kSecondaryColor, fontSize: 16),
                         ),
-                        Spacer(),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 15),
+                        const Spacer(),
+                        const Padding(
+                          padding: EdgeInsets.only(right: 15),
                           child: Text(
                             'Quên mật khẩu',
                             style: TextStyle(
@@ -117,7 +116,7 @@ class _BodyLoginState extends State<BodyLogin> {
                       text: 'ĐĂNG NHẬP',
                       press: () {
                         AppPages.routes;
-                        Get.toNamed(AppPages.getNavbar());
+                        Get.to(AppPages.getNavbar(),transition: Transition.fade,duration: Duration(seconds: 1));
                         //Navigator.restorablePushNamed(context, home);
                       },
                       radius: 30,

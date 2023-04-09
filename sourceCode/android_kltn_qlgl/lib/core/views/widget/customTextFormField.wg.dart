@@ -11,13 +11,13 @@ class CustomTextFormField extends StatefulWidget {
     required this.hint,
     required this.pIcon,
     required this.keyType,
-    required this.Controller,
+    required this.controller,
   }) : super(key: key);
   final String label;
   final String hint;
   final IconData pIcon;
   final TextInputType keyType;
-  final TextEditingController Controller;
+  final TextEditingController controller;
 
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
@@ -25,16 +25,11 @@ class CustomTextFormField extends StatefulWidget {
 
 class _CustomTextFormFieldState extends State<CustomTextFormField> {
   bool _obscure = true;
-  void _toggle() {
-    setState(() {
-      _obscure = !_obscure;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: widget.Controller,
+      controller: widget.controller,
       obscureText:
           (widget.label == 'Mật khẩu' || widget.label == 'Xác nhận mật khẩu')
               ? _obscure
@@ -42,9 +37,9 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       keyboardType: widget.keyType,
       decoration: InputDecoration(
         labelText: widget.label,
-        labelStyle: TextStyle(fontWeight: FontWeight.w600,fontSize: 16),
+        labelStyle: const TextStyle(fontWeight: FontWeight.w600,fontSize: 16),
         floatingLabelStyle:
-            TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
+            const TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
         floatingLabelAlignment: FloatingLabelAlignment.center,
         contentPadding: EdgeInsets.symmetric(
             horizontal: (widget.label == 'Mật khẩu' ||
@@ -65,8 +60,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                       });
                     },
                     icon: _obscure
-                        ? CustomSufffixIcon(icon: Icons.visibility)
-                        : CustomSufffixIcon(icon: Icons.visibility_off),
+                        ? const CustomSufffixIcon(icon: Icons.visibility)
+                        : const CustomSufffixIcon(icon: Icons.visibility_off),
                   )
                 : null,
         //floatingLabelBehavior: FloatingLabelBehavior.always,

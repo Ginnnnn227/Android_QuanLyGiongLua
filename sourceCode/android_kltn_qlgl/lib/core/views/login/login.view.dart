@@ -5,6 +5,8 @@ import 'package:qlgl_project/core/controllers/login.controller.dart';
 import 'body_login.dart';
 
 class LoginView extends GetView<LoginController> {
+  const LoginView({super.key});
+
   //const LoginView({super.key});
 
 //   @override
@@ -14,15 +16,8 @@ class LoginView extends GetView<LoginController> {
 // class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
         //appBar: AppBar(),
-        body: Container(
-            // decoration: BoxDecoration(
-            //   image: DecorationImage(
-            //     fit: BoxFit.cover,
-            //     image: AssetImage('assets/logo/background.jpg'),
-            //   ),
-            // ),
-            child: BodyLogin()));
+        body: BodyLogin());
   }
 }

@@ -3,6 +3,8 @@
 import 'package:get/get.dart';
 import 'package:http/http.dart';
 
+import '../controllers/nhomgiong_list.controller.dart';
+
 
 class BottomNavbarController extends GetxController {
   var tabIndex = 0;
