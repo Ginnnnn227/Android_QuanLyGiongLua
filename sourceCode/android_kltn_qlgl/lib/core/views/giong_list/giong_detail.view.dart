@@ -50,7 +50,8 @@ class _GiongDetailViewState extends State<GiongDetailView> {
             SizedBox(
               width: double.infinity,
               child: Image.network(
-                "https://trungtamphantichchungnhanhanoi.gov.vn/wp-content/uploads/2021/12/Giong-lua-lai-KC06-1.jpg",
+                "http://localhost/quanlyluagiong/storage/app/${data.giongHinhanh}"
+                //"https://trungtamphantichchungnhanhanoi.gov.vn/wp-content/uploads/2021/12/Giong-lua-lai-KC06-1.jpg",
               ),
             ),
             backButtonArrow(context),

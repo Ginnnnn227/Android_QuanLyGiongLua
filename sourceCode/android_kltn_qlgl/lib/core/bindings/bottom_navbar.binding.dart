@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 
+import '../controllers/giaidoantruongthanh_list.controller.dart';
 import '../controllers/giong_list.controller.dart';
 import '../controllers/kieuhinh_list.controller.dart';
 import '../controllers/nhomgiong_list.controller.dart';
@@ -15,6 +16,8 @@ class BottomNavbarBinding extends Bindings {
     Get.lazyPut<NhomGiongListController>(() => NhomGiongListController());
     Get.lazyPut<KieuHinhListController>(() => KieuHinhListController());
     Get.lazyPut<GiongListController>(() => GiongListController());
+
+    Get.lazyPut<GDTTListController>(() => GDTTListController());
 
     Get.lazyPut<ProfileController>(() => ProfileController());
   }

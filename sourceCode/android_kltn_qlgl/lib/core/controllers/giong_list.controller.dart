@@ -6,7 +6,7 @@ import 'package:qlgl_project/core/models/giong.model.dart';
 
 import '../constant/apiurl.const.dart';
 
-class GiongListController extends GetxController{
+class GiongListController extends GetxController {
   RxBool isLoading = true.obs;
   RxList<giongModel> data = RxList<giongModel>([]);
   RxString search = ''.obs;
@@ -16,15 +16,16 @@ class GiongListController extends GetxController{
       return data.toList();
     } else {
       return data
-          .where((item) => item.giongTen!
-              .toLowerCase()
-              .contains(search.value.toLowerCase()))
+          .where((item) =>
+              item.giongTen!.toLowerCase().contains(search.value.toLowerCase()))
           .toList();
     }
   }
+
   List<giongModel> get allData {
     return data.toList();
   }
+
   Future<void> fetchData() async {
     try {
       final response = await Dio()
@@ -52,6 +53,7 @@ class GiongListController extends GetxController{
     }
     update();
   }
+
   @override
   void onInit() {
     super.onInit();

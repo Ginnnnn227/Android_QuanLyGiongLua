@@ -11,6 +11,7 @@ import 'package:qlgl_project/core/views/register/register.view.dart';
 import 'views/giong_list/giong_detail.view.dart';
 import 'views/giong_list/giong_list.view.dart';
 import 'views/kieuhinh_list/kieuhinh_list.view.dart';
+import 'views/tinhtrang/giaidoantruongthanh_list.view.dart';
 
 
 // class AppRoutes {
@@ -30,9 +31,11 @@ class AppPages {
 
     GetPage(name: nhomgionglist, page: ()=>NhomGiongListView()),
     GetPage(name: kieuhinhlist, page: ()=>KieuHinhListView()),
-    GetPage(name: gionglist, page: ()=>GiongListView()),
 
+    GetPage(name: gionglist, page: ()=>GiongListView()),
     GetPage(name: giongdetail, page: ()=>GiongDetailView()),
+
+    GetPage(name: giaidoantruongthanhlist, page: ()=>GDTTListView()),
   ];
   //---------------------------------------------
   static getLogin() => login;
@@ -44,9 +47,11 @@ class AppPages {
 
   static getNhomGiongList() => NhomGiongListView();
   static getKieuHinhList() => KieuHinhListView();
-  static getGiongList() => GiongListView();
 
+  static getGiongList() => GiongListView();
   static getGiongDetail() => GiongDetailView();
+
+  static getGDTTList() => GDTTListView();
   //----------------------------------------------
   static String login = '/login';
   static String register = '/register';
@@ -57,9 +62,11 @@ class AppPages {
   
   static String nhomgionglist = '/nhomgionglist';
   static String kieuhinhlist = '/kieuhinhlist';
-  static String gionglist = '/gionglist';
 
+  static String gionglist = '/gionglist';
   static String giongdetail = '/giongdetail';
+
+  static String giaidoantruongthanhlist = '/giaidoantruongthanhlist';
   // static var list = [
   //   GetPage(
   //     name: AppRoutes.login,

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class giongModel{
   int? _id;
   String? _giongTen;
@@ -74,7 +76,7 @@ class giongModel{
     _giongTen = json["giong_ten"];
     _giongMota = json["giong_mota"]?? 'Chưa cập nhật';
     _giongNguongoc = json["giong_nguongoc"]?? 'Chưa cập nhật';
-    _giongHinhanh = "http://127.0.0.1:80/quanlyluagiong/storage/app/${json["giong_hinhanh"]}";
+    _giongHinhanh = json["giong_hinhanh"];//"http://localhost:80/quanlyluagiong/storage/app/${json["giong_hinhanh"]}";
     _nhomgiongTen = json["nhomgiong_ten"];
     _kieuhinhTen = json["kieuhinh_ten"];
     _createdAt = json["created_at"];

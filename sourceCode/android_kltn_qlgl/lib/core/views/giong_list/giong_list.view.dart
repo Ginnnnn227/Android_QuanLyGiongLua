@@ -1,10 +1,13 @@
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:full_screen_image/full_screen_image.dart';
 import 'package:get/get.dart';
 
 import '../../constant/color.const.dart';
 import '../../controllers/giong_list.controller.dart';
-import 'package:qlgl_project/core/models/giong.model.dart';
 
 import '../../funtion.dart';
 import '../../routes.dart';
@@ -116,17 +119,42 @@ class _GiongListViewState extends State<GiongListView> {
                             child: ListTile(
                               onTap: () {
                                 AppPages.routes;
-                                Get.to(AppPages.getGiongDetail(),arguments: item);
+                                Get.to(AppPages.getGiongDetail(),
+                                    arguments: item);
                               },
                               leading: FullScreenWidget(
                                 backgroundColor: Colors.white.withOpacity(0.1),
                                 disposeLevel: DisposeLevel.High,
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(5),
-                                  child: Image.network(
-                                    "https://trungtamphantichchungnhanhanoi.gov.vn/wp-content/uploads/2021/12/Giong-lua-lai-KC06-1.jpg",
-                                    height: 100,
+                                  child:
+                                      // Image.network(
+                                      //     "http://localhost:80/quanlyluagiong/storage/app/${item.giongHinhanh}",
+                                      //     loadingBuilder:
+                                      //         (context, child, loadingProgress) =>
+                                      //             loadingProgress == null
+                                      //                 ? child
+                                      //                 : Container(
+                                      //                     child: Center(
+                                      //                         child:
+                                      //                             CircularProgressIndicator()),
+                                      //                   ),
+                                      //     fit: BoxFit.fitWidth),
+                                      Image.network(
+                                    'http://localhost:80/quanlyluagiong/storage/app/${item.giongHinhanh}',
+                                    fit: BoxFit.cover,
+                                    scale: 1.0,
+                                    //"https://trungtamphantichchungnhanhanoi.gov.vn/wp-content/uploads/2021/12/Giong-lua-lai-KC06-1.jpg",
+                                    height: 50,
                                   ),
+                                  //     CachedNetworkImage(
+                                  //   imageUrl:
+                                  //       "http://localhost:80/quanlyluagiong/storage/app/${item.giongHinhanh}",
+                                  //   placeholder: (context, url) =>
+                                  //       new CircularProgressIndicator(),
+                                  //   errorWidget: (context, url, error) =>
+                                  //       new Icon(Icons.error),
+                                  // ),
                                 ),
                               ),
                               title: Text(
@@ -159,6 +187,27 @@ class _GiongListViewState extends State<GiongListView> {
                 }
               },
             ),
+            // Center(
+            //   child: CachedNetworkImage(
+            //     imageUrl:
+            //         "http://localhost/quanlyluagiong/storage/app/lua-f2/lua-f2.jpg",
+            //     placeholder: new CircularProgressIndicator(),
+            //     errorWidget: new Icon(Icons.error),
+            //   ),
+            // )
+            // Center(
+            //   child: Image.network(
+            //     'http://localhost/quanlyluagiong/storage/app/lua-f2/lua-f2.jpg',
+            //     fit: BoxFit.cover,
+            //   ),
+            // ),
+            // Center(
+            //   child: Image.memory(
+            //     base64.decode(
+            //         'http://localhost/quanlyluagiong/storage/app/lua-f2/lua-f2.jpg'),
+            //     fit: BoxFit.cover,
+            //   ),
+            // ),
           ],
         ),
       ),

@@ -1,6 +1,6 @@
 // ignore_for_file: unnecessary_brace_in_string_interps, constant_identifier_names
 
-const ip = "192.168.1.7";
+const ip = "192.168.1.6";
 //const ip = "127.0.0.1";
 const port = 88;
 const baseURL = 'http://${ip}:${port}/api/';

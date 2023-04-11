@@ -1,8 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
-
-
 import 'package:flutter/material.dart';
+import 'package:full_screen_image/full_screen_image.dart';
 import 'package:get/get.dart';
 
 import 'package:qlgl_project/core/constant/color.const.dart';
@@ -17,6 +16,7 @@ import '../../controllers/kieuhinh_list.controller.dart';
 import '../../controllers/nhomgiong_list.controller.dart';
 import '../../funtion.dart';
 import 'model/horicarditem.model.dart';
+import 'model/verticalitem.model.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -81,7 +81,6 @@ class _HomeViewState extends State<HomeView> {
     });
   }
 
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -150,7 +149,7 @@ class _HomeViewState extends State<HomeView> {
                 //alignment: Alignment.center,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: 3,
+                  itemCount: HCItems.length,
                   itemBuilder: (context, index) =>
                       buildHoriCard(item: HCItems[index]),
                 ),
@@ -171,6 +170,25 @@ class _HomeViewState extends State<HomeView> {
               SizedBox(
                 height: getProportionateScreenHeight(20),
               ),
+              // Column(
+              //   children: <Widget>[
+              //     Expanded(
+              //         child: ListView.builder(
+              //             itemCount: VCItems.length,
+              //             itemBuilder: (context, index) {
+              //               return buildVertiCard(item: VCItems[index]);
+              //             })),
+              //   ],
+              // ),
+              //Vertical card item
+              Column(
+                children: <Widget>[
+                  buildVertiCard("Giai đoạn trưởng thành", () {
+                    AppPages.routes;
+                    Get.to(AppPages.getGDTTList());
+                  }),
+                ],
+              )
             ],
           ),
         ),
@@ -302,6 +320,66 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
+//widget build vertical card item
+  Widget buildVertiCard(String title, VoidCallback funct) {
+    return InkWell(
+      onTap: () => funct(),
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Container(
+          height: 60,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            //border: Border.all(color: Colors.black),
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.blueGrey.withOpacity(0.5),
+                offset: const Offset(
+                  2.5,
+                  2.5,
+                ),
+                blurRadius: 5.0,
+                spreadRadius: 1.0,
+              ),
+              const BoxShadow(
+                color: kPrimaryColor,
+                offset: Offset(0.0, 0.0),
+                blurRadius: 1.0,
+                spreadRadius: 0.0,
+              ),
+            ],
+          ),
+          child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Expanded(
+                  flex: 1,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(5),
+                    child: Image.asset(
+                      "assets/logo/list.png",
+                      height: 50,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 3,
+                  child: Text(
+                    title.toUpperCase(),
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: secondaryDark,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ]),
+        ),
+      ),
+    );
+  }
+
 //widget build horizontal card item
   Widget buildHoriCard({required HorizontalCardItem item}) {
     return GestureDetector(
@@ -322,26 +400,27 @@ class _HomeViewState extends State<HomeView> {
               height: 100,
               width: 120,
               decoration: BoxDecoration(
-                  color: Colors.white,
-                  //border: Border.all(color: Colors.black),
-                  borderRadius: BorderRadius.circular(30),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.blueGrey.withOpacity(0.5),
-                      offset: const Offset(
-                        2.5,
-                        2.5,
-                      ),
-                      blurRadius: 5.0,
-                      spreadRadius: 1.0,
+                color: Colors.white,
+                //border: Border.all(color: Colors.black),
+                borderRadius: BorderRadius.circular(30),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.blueGrey.withOpacity(0.5),
+                    offset: const Offset(
+                      2.5,
+                      2.5,
                     ),
-                    const BoxShadow(
-                      color: kPrimaryColor,
-                      offset: Offset(0.0, 0.0),
-                      blurRadius: 1.0,
-                      spreadRadius: 0.0,
-                    ),
-                  ]),
+                    blurRadius: 5.0,
+                    spreadRadius: 1.0,
+                  ),
+                  const BoxShadow(
+                    color: kPrimaryColor,
+                    offset: Offset(0.0, 0.0),
+                    blurRadius: 1.0,
+                    spreadRadius: 0.0,
+                  ),
+                ],
+              ),
               child: Text(
                 numberCustom10(countData(item.title)),
                 style: TextStyle(

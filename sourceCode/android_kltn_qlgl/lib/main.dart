@@ -5,6 +5,7 @@ import 'package:qlgl_project/core/navbar/bottom_navbar.controller.dart';
 
 import 'core/constant/color.const.dart';
 import 'core/controllers/field_list.controller.dart';
+import 'core/controllers/giaidoantruongthanh_list.controller.dart';
 import 'core/controllers/giong_list.controller.dart';
 import 'core/controllers/kieuhinh_list.controller.dart';
 import 'core/controllers/nhomgiong_list.controller.dart';
@@ -39,6 +40,8 @@ void main() {
 
   Get.put(MaPTNListController());
   Get.put(MaFIELDListController());
+
+  Get.put(GDTTListController());
 
   // runApp(DevicePreview(
   //   enabled: !kReleaseMode,
