@@ -20,7 +20,7 @@ class _KieuHinhListViewState extends State<KieuHinhListView> {
   @override
   void initState() {
     super.initState();
-    setState(() {
+    setState((){
       KHlistController.fetchData();
       KHlistController.search.value = '';
     });

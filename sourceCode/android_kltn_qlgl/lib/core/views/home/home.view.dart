@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:qlgl_project/core/constant/color.const.dart';
 import 'package:qlgl_project/core/constant/size.const.dart';
 import 'package:qlgl_project/core/routes.dart';
-import 'package:qlgl_project/core/views/nhomgiong_list/nhomgiong_list.view.dart';
 import 'package:qlgl_project/core/views/widget/customDialog.wg.dart';
 import 'package:slide_digital_clock/slide_digital_clock.dart';
 
@@ -16,7 +15,6 @@ import '../../controllers/kieuhinh_list.controller.dart';
 import '../../controllers/nhomgiong_list.controller.dart';
 import '../../funtion.dart';
 import 'model/horicarditem.model.dart';
-import 'model/verticalitem.model.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -68,7 +66,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   void initState() {
     super.initState();
-    setState(() {
+    setState((){
       NGlistController.fetchData();
       KHlistController.fetchData();
       GlistController.fetchData();
@@ -77,7 +75,7 @@ class _HomeViewState extends State<HomeView> {
       countG = GlistController.allData.length;
       print("Số lượng nhóm giống: $countNG");
       print("Số lượng kiểu hình: $countKH");
-      print("Số lượng kiểu hình: $countG");
+      print("Số lượng giống: $countG");
     });
   }
 
@@ -108,7 +106,7 @@ class _HomeViewState extends State<HomeView> {
                 trailing: GestureDetector(
                   onTap: () {
                     ConfirmDialog(
-                      context,
+                      //context,
                       'Xác nhận',
                       'Bạn chắc chắn muốn đăng xuất?',
                       () {
@@ -186,6 +184,10 @@ class _HomeViewState extends State<HomeView> {
                   buildVertiCard("Giai đoạn trưởng thành", () {
                     AppPages.routes;
                     Get.to(AppPages.getGDTTList());
+                  }),
+                  buildVertiCard("Tính trạng giống lúa", () {
+                    AppPages.routes;
+                    Get.to(AppPages.getTinhTrangList());
                   }),
                 ],
               )

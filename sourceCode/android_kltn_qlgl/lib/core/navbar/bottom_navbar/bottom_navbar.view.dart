@@ -18,11 +18,14 @@ class BottomNavbarView extends StatefulWidget {
 }
 
 class _BottomNavbarViewState extends State<BottomNavbarView> {
-  
+  BottomNavbarController controller = Get.find();
+  @override
+  void initState() {
+    // TODO: implement initState
+    controller.tabIndex=0;
+  }
   @override
   Widget build(BuildContext context) {
-    BottomNavbarController controller = Get.find();
-
     return GetBuilder<BottomNavbarController>(
       builder: (context) {
         return Scaffold(
@@ -65,6 +68,7 @@ class _BottomNavbarViewState extends State<BottomNavbarView> {
             ),
           ),
           bottomNavigationBar: BottomNavigationBar(
+            
             type: BottomNavigationBarType.shifting,
             currentIndex: controller.tabIndex,
             onTap: controller.changeTabIndex,

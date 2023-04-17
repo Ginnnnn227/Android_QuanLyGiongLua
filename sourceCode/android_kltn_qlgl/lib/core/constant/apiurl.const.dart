@@ -15,9 +15,9 @@ const maptnURL = '${baseURL}maptns';
 const mangoaidongURL = '${baseURL}mangoaidongs';
 
 const giaidoantruongthanhURL = '${baseURL}giaidoantruongthanhs';
-const doituongtinhtrangURL = '${baseURL}doituongtinhtrang';
-const dacdiemtinhtrangURL = '${baseURL}dacdiemtinhtrang';
-const giatritinhtrangURL = '${baseURL}giatritinhtrang';
+const doituongtinhtrangURL = '${baseURL}doituongtinhtrangs';
+const dacdiemtinhtrangURL = '${baseURL}dacdiemtinhtrangs';
+const giatritinhtrangURL = '${baseURL}giatritinhtrangs';
 //-----------AUTH-------------------------
 const user_authURL = '${baseURL}auth/user';
 const login_authURL = '${baseURL}auth/login';

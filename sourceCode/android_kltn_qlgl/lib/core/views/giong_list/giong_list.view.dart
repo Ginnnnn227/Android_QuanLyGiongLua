@@ -1,14 +1,14 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:full_screen_image/full_screen_image.dart';
 import 'package:get/get.dart';
+import 'package:qlgl_project/core/constant/size.const.dart';
+import 'package:qlgl_project/core/models/nhomgiong.model.dart';
 
 import '../../constant/color.const.dart';
 import '../../controllers/giong_list.controller.dart';
 
+import '../../controllers/nhomgiong_list.controller.dart';
 import '../../funtion.dart';
 import '../../routes.dart';
 
@@ -21,13 +21,25 @@ class GiongListView extends StatefulWidget {
 
 showImage() {
   return FullScreenWidget(
-    disposeLevel: DisposeLevel.Medium,
-    child: Hero(
-      tag: "Image show",
+    backgroundColor: Colors.white.withOpacity(0.1),
+    disposeLevel: DisposeLevel.High,
+    child: ClipRRect(
+      borderRadius: BorderRadius.circular(5),
       child: Image.network(
+        //'http://localhost:80/quanlyluagiong/storage/app/${item.giongHinhanh}',
+        fit: BoxFit.cover,
+        scale: 1.0,
         "https://trungtamphantichchungnhanhanoi.gov.vn/wp-content/uploads/2021/12/Giong-lua-lai-KC06-1.jpg",
-        height: 100,
+        height: 50,
       ),
+      //     CachedNetworkImage(
+      //   imageUrl:
+      //       "http://localhost:80/quanlyluagiong/storage/app/${item.giongHinhanh}",
+      //   placeholder: (context, url) =>
+      //       new CircularProgressIndicator(),
+      //   errorWidget: (context, url, error) =>
+      //       new Icon(Icons.error),
+      // ),
     ),
   );
 }
@@ -41,6 +53,8 @@ class _GiongListViewState extends State<GiongListView> {
     setState(() {
       GlistController.fetchData();
       GlistController.search.value = '';
+      GlistController.loadDropdown();
+      GlistController.selectedNG.value = "all";
     });
   }
 
@@ -48,6 +62,8 @@ class _GiongListViewState extends State<GiongListView> {
     setState(() {
       GlistController.fetchData();
       GlistController.search.value = '';
+      GlistController.loadDropdown();
+      GlistController.selectedNG.value = "all";
     });
     Navigator.pushReplacement(
         context,
@@ -70,6 +86,7 @@ class _GiongListViewState extends State<GiongListView> {
         onRefresh: _loadpage,
         child: Column(
           children: <Widget>[
+            //search field
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               child: TextField(
@@ -91,16 +108,71 @@ class _GiongListViewState extends State<GiongListView> {
                 ),
               ),
             ),
+            //dropdownbutton nhom giong
+            Obx(
+              () => Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                child: DropdownButtonFormField<String>(
+                  iconSize: 25,
+                  isExpanded: false,
+                  icon: const Icon(
+                    Icons.arrow_drop_down_circle,
+                    color: Colors.cyan,
+                  ),
+                  dropdownColor: Colors.cyan.shade50,
+                  decoration: const InputDecoration(
+                    labelText: "Chọn nhóm giống: ",
+                    labelStyle: TextStyle(fontSize: 20),
+                    border: OutlineInputBorder(),
+                  ),
+                  value: GlistController.selectedNG.value,
+                  items: [
+                    DropdownMenuItem<String>(
+                      //alignment: AlignmentDirectional.centerStart,
+                      value: 'all',
+                      child: Text(
+                        'Tất cả nhóm giống'.toUpperCase(),
+                        style: const TextStyle(
+                          fontSize: 18,
+                          color: Colors.cyan,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    ...GlistController.nhomgiongs.value.map(
+                      (item) => DropdownMenuItem(
+                        value: item.nhomgiongTen,
+                        child: Text(
+                          item.nhomgiongTen!.toUpperCase(),
+                          style: const TextStyle(
+                            fontSize: 18,
+                            color: Colors.grey,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                  onChanged: (value) {
+                    GlistController.selectedNG.value = value!;
+                    debugPrint(GlistController.selectedNG.value);
+                  },
+                ),
+              ),
+            ),
+            //count
             Obx(() {
               return Text(
                 "Số lượng: ${numberCustom10(GlistController.filteredData.length)}",
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
                     color: kPrimaryColor),
               );
             }),
             Divider(),
+            //list giống
             Obx(
               () {
                 if (GlistController.isLoading.value) {
@@ -122,41 +194,7 @@ class _GiongListViewState extends State<GiongListView> {
                                 Get.to(AppPages.getGiongDetail(),
                                     arguments: item);
                               },
-                              leading: FullScreenWidget(
-                                backgroundColor: Colors.white.withOpacity(0.1),
-                                disposeLevel: DisposeLevel.High,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(5),
-                                  child:
-                                      // Image.network(
-                                      //     "http://localhost:80/quanlyluagiong/storage/app/${item.giongHinhanh}",
-                                      //     loadingBuilder:
-                                      //         (context, child, loadingProgress) =>
-                                      //             loadingProgress == null
-                                      //                 ? child
-                                      //                 : Container(
-                                      //                     child: Center(
-                                      //                         child:
-                                      //                             CircularProgressIndicator()),
-                                      //                   ),
-                                      //     fit: BoxFit.fitWidth),
-                                      Image.network(
-                                    'http://localhost:80/quanlyluagiong/storage/app/${item.giongHinhanh}',
-                                    fit: BoxFit.cover,
-                                    scale: 1.0,
-                                    //"https://trungtamphantichchungnhanhanoi.gov.vn/wp-content/uploads/2021/12/Giong-lua-lai-KC06-1.jpg",
-                                    height: 50,
-                                  ),
-                                  //     CachedNetworkImage(
-                                  //   imageUrl:
-                                  //       "http://localhost:80/quanlyluagiong/storage/app/${item.giongHinhanh}",
-                                  //   placeholder: (context, url) =>
-                                  //       new CircularProgressIndicator(),
-                                  //   errorWidget: (context, url, error) =>
-                                  //       new Icon(Icons.error),
-                                  // ),
-                                ),
-                              ),
+                              leading: showImage(),
                               title: Text(
                                 "${item.giongTen}".toUpperCase(),
                                 style: const TextStyle(

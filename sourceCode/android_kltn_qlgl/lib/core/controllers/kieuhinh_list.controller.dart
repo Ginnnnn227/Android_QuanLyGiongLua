@@ -56,8 +56,8 @@ class KieuHinhListController extends GetxController{
   }
 
   @override
-  void onInit() {
+  void onInit() async{
     super.onInit();
-    fetchData();
+    await fetchData();
   }
 }

@@ -1,27 +1,25 @@
-// ignore_for_file: camel_case_types
-
-class giaidoantruongthanhModel {
+class dacdiemtinhtrangModel{
   int? _id;
-  String? _gdttTen;
-  String? _gdttMota;
+  String? _dtttTen;
+  String? _ddttTen;
   String? _createdAt;
   String? _updatedAt;
 
-  giaidoantruongthanhModel({
+  dacdiemtinhtrangModel({
     int? id,
-    String? gdttTen,
-    String? gdttMota,
+    String? dtttTen,
+    String? ddttTen,
     String? createdAt,
     String? updatedAt
   }){
     if(id != null){
       _id = id;
     }
-    if (gdttTen != null) {
-      _gdttTen = gdttTen;
+    if (dtttTen != null) {
+      _dtttTen = dtttTen;
     }
-    if (gdttMota != null) {
-      _gdttMota = gdttMota;
+    if (ddttTen != null) {
+      _ddttTen = ddttTen;
     }
     if (createdAt != null) {
       _createdAt = createdAt;
@@ -32,21 +30,21 @@ class giaidoantruongthanhModel {
   }
 
   int? get id => _id;
-  String? get gdttTen => _gdttTen;
-  String? get gdttMota => _gdttMota;
+  String? get dtttTen => _dtttTen;
+  String? get ddttTen => _ddttTen;
   String? get createdAt => _createdAt;
   String? get updatedAt => _updatedAt;
 
   //set id(int? id) => _id = id;
-  set gdttTen(String? gdttTen) => _gdttTen = gdttTen;
-  set gdttMota(String? gdttMota) => _gdttMota = gdttMota;
+  set dtttTen(String? dtttTen) => _dtttTen = dtttTen;
+  set dtttMota(String? ddttTen) => _ddttTen = ddttTen;
   // set createdAt(String? createdAt) => _createdAt = createdAt;
   // set updatedAt(String? updatedAt) => _updatedAt = updatedAt;
 
-  giaidoantruongthanhModel.fromJson(Map<String, dynamic> json) {
+  dacdiemtinhtrangModel.fromJson(Map<String, dynamic> json) {
     _id = json['id'];
-    _gdttTen = json['giaidoantt_ten'];
-    _gdttMota = json['giaidoantt_mota'];
+    _dtttTen = json['doituongtt_ten'];
+    _ddttTen = json['dacdiemtt_ten'];
     _createdAt = json['created_at'];
     _updatedAt = json['updated_at'];
   }
@@ -54,8 +52,8 @@ class giaidoantruongthanhModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = _id;
-    data['giaidoantt_ten'] = _gdttTen;
-    data['giaidoantt_mota'] = _gdttMota;
+    data['doituongtt_ten'] = _dtttTen;
+    data['dacdiemtt_ten'] = _ddttTen;
     data['created_at'] = _createdAt;
     data['updated_at'] = _updatedAt;
     return data;

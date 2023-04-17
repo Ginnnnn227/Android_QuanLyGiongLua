@@ -1,17 +1,23 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:get/get.dart';
-import 'package:qlgl_project/core/navbar/bottom_navbar/bottom_navbar.view.dart';
-import 'package:qlgl_project/core/views/home/home.view.dart';
-import 'package:qlgl_project/core/views/login/login.view.dart';
-import 'package:qlgl_project/core/views/nhomgiong_list/nhomgiong_list.view.dart';
-import 'package:qlgl_project/core/views/profile/profile.view.dart';
-import 'package:qlgl_project/core/views/register/register.view.dart';
 
+import 'navbar/bottom_navbar/bottom_navbar.view.dart';
+
+import 'views/home/home.view.dart';
+import 'views/login/login.view.dart';
+import 'views/register/register.view.dart';
+
+import 'views/profile/profile.view.dart';
+
+import 'views/nhomgiong_list/nhomgiong_list.view.dart';
 import 'views/giong_list/giong_detail.view.dart';
 import 'views/giong_list/giong_list.view.dart';
 import 'views/kieuhinh_list/kieuhinh_list.view.dart';
+
 import 'views/tinhtrang/giaidoantruongthanh_list.view.dart';
+import 'views/tinhtrang/tinhtrang_detail.view.dart';
+import 'views/tinhtrang/tinhtrang_list.view.dart';
 
 
 // class AppRoutes {
@@ -36,14 +42,17 @@ class AppPages {
     GetPage(name: giongdetail, page: ()=>GiongDetailView()),
 
     GetPage(name: giaidoantruongthanhlist, page: ()=>GDTTListView()),
+
+    GetPage(name: tinhtranglist, page: ()=>TinhTrangListView()),
+    GetPage(name: tinhtrangdetail, page: ()=>TinhTrangDetailView()),
   ];
   //---------------------------------------------
   static getLogin() => login;
   static getRegister() => register;
 
   static getNavbar() => BottomNavbarView();
-  static getHome() => home;
-  static getProfile() => profile;
+  static getHome() => HomeView();
+  static getProfile() => ProfileView();
 
   static getNhomGiongList() => NhomGiongListView();
   static getKieuHinhList() => KieuHinhListView();
@@ -52,6 +61,9 @@ class AppPages {
   static getGiongDetail() => GiongDetailView();
 
   static getGDTTList() => GDTTListView();
+
+  static getTinhTrangList() => TinhTrangListView();
+  static getTinhTrangDetail() => TinhTrangDetailView();
   //----------------------------------------------
   static String login = '/login';
   static String register = '/register';
@@ -67,6 +79,9 @@ class AppPages {
   static String giongdetail = '/giongdetail';
 
   static String giaidoantruongthanhlist = '/giaidoantruongthanhlist';
+
+  static String tinhtranglist = '/tinhtranglist';
+  static String tinhtrangdetail = '/tinhtrangdetail';
   // static var list = [
   //   GetPage(
   //     name: AppRoutes.login,

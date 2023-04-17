@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 
 import '../../constant/color.const.dart';
 import '../../controllers/giaidoantruongthanh_list.controller.dart';
 import '../../funtion.dart';
 import '../../models/giaidoantruongthanh.model.dart';
+import '../widget/customDialog.wg.dart';
 
 class GDTTListView extends StatefulWidget {
   const GDTTListView({super.key});
@@ -93,23 +95,76 @@ class _GDTTListViewState extends State<GDTTListView> {
                     itemCount: GDTTlistController.filteredData.length,
                     itemBuilder: (context, index) {
                       final item = GDTTlistController.filteredData[index];
-                      return cardItemGDTT(index, item);
+                      return Slidable(
+                        key: Key('$item'),
+                        startActionPane: ActionPane(
+                          motion: const ScrollMotion(),
+                          children: <Widget>[
+                            SlidableAction(
+                              onPressed: (context) async{
+                                // GDTTlistController.fetchDataById(item.id!);
+                                GDTTlistController.showUpdateProductDialog(item.id!);
+                              },
+                              backgroundColor: Colors.blue,
+                              icon: Icons.edit,
+                            ),
+                          ],
+                        ),
+                        endActionPane: ActionPane(
+                          motion: const ScrollMotion(),
+                          children: <Widget>[
+                            SlidableAction(
+                              onPressed: (context) {
+                                ConfirmDialog("XÁC NHẬN",
+                                        "Bạn có chắc chắn muốn xóa?\n${item.gdttTen?.toUpperCase()}",
+                                        () async {
+                                  GDTTlistController.submitDelete(item.id!);
+                                  //debugPrint(item.id.toString());
+                                }, () {})
+                                    .show();
+                                //GDTTlistController.showConfirmDeleteDialog("${item.gdttTen}");
+                              },
+                              backgroundColor: Colors.red,
+                              icon: Icons.delete,
+                            ),
+                          ],
+                        ),
+                        child: cardItemGDTT(index, item),
+                      );
                     },
                   ),
                 );
               }
             }),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.cyan,
+                  minimumSize: const Size.fromHeight(60)),
+              onPressed: () => GDTTlistController.showCreateProductDialog(),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Icon(Icons.add_circle_outline,size: 30,),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    "Thêm mới".toUpperCase(),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => GDTTlistController.showCreateProductDialog(),
-        child: Icon(Icons.add),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () => GDTTlistController.showCreateProductDialog(),
+      //   child: Icon(Icons.add),
+      // ),
     );
   }
-
-  
 
   Widget cardItemGDTT(int index, giaidoantruongthanhModel item) {
     return Card(
@@ -150,11 +205,12 @@ class _GDTTListViewState extends State<GDTTListView> {
                       color: Colors.blue),
                   textAlign: TextAlign.left,
                 ),
-                Text(
-                  "${item.gdttMota!}",
+                Text(item.gdttMota != null?
+                  "${item.gdttMota!}":
+                  "Chưa cập nhật",
                   style: TextStyle(
                       fontSize: 20,
-                      color: item.gdttMota != 'Chưa cập nhật'
+                      color: item.gdttMota != null
                           ? Colors.black54
                           : Colors.red),
                   textAlign: TextAlign.justify,

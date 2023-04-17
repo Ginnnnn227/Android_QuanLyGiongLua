@@ -56,9 +56,10 @@ class NhomGiongListController extends GetxController {
     update();
   }
 
+
   @override
-  void onInit() {
+  void onInit() async{
     super.onInit();
-    fetchData();
+    await fetchData();
   }
 }

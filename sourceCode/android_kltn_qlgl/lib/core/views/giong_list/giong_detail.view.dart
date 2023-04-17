@@ -17,8 +17,8 @@ class GiongDetailView extends StatefulWidget {
 }
 
 class _GiongDetailViewState extends State<GiongDetailView> {
-  final MaPTNListController PTNlistController = Get.find();
-  final MaFIELDListController FIELDlistController = Get.find();
+  final MaPTNListController PTNlistController = Get.put(MaPTNListController());
+  final MaFIELDListController FIELDlistController = Get.put(MaFIELDListController());
 
   giongModel data = Get.arguments;
   @override
@@ -50,8 +50,8 @@ class _GiongDetailViewState extends State<GiongDetailView> {
             SizedBox(
               width: double.infinity,
               child: Image.network(
-                "http://localhost/quanlyluagiong/storage/app/${data.giongHinhanh}"
-                //"https://trungtamphantichchungnhanhanoi.gov.vn/wp-content/uploads/2021/12/Giong-lua-lai-KC06-1.jpg",
+                //"http://localhost/quanlyluagiong/storage/app/${data.giongHinhanh}"
+                "https://trungtamphantichchungnhanhanoi.gov.vn/wp-content/uploads/2021/12/Giong-lua-lai-KC06-1.jpg",
               ),
             ),
             backButtonArrow(context),
