@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:qlgl_project/core/constant/color.const.dart';
-import 'package:qlgl_project/core/controllers/profile.controller.dart';
+import 'package:qlgl_project/core/views/profile/profile.controller.dart';
 
 import '../../routes.dart';
 import '../widget/customDialog.wg.dart';

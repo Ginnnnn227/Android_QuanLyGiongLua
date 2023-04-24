@@ -1,8 +1,8 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:flutter/material.dart';
-import 'package:full_screen_image/full_screen_image.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 import 'package:qlgl_project/core/constant/color.const.dart';
 import 'package:qlgl_project/core/constant/size.const.dart';
@@ -14,6 +14,7 @@ import '../../controllers/giong_list.controller.dart';
 import '../../controllers/kieuhinh_list.controller.dart';
 import '../../controllers/nhomgiong_list.controller.dart';
 import '../../funtion.dart';
+import 'home.controller.dart';
 import 'model/horicarditem.model.dart';
 
 class HomeView extends StatefulWidget {
@@ -26,6 +27,8 @@ class _HomeViewState extends State<HomeView> {
   final NhomGiongListController NGlistController = Get.find();
   final KieuHinhListController KHlistController = Get.find();
   final GiongListController GlistController = Get.find();
+
+  final HomeController homeController = Get.put(HomeController());
   var countNG;
   var countKH;
   var countG;
@@ -66,7 +69,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   void initState() {
     super.initState();
-    setState((){
+    setState(() {
       NGlistController.fetchData();
       KHlistController.fetchData();
       GlistController.fetchData();
@@ -94,24 +97,29 @@ class _HomeViewState extends State<HomeView> {
             children: <Widget>[
               ListTile(
                 leading: Image.asset('assets/logo/profile.png'),
-                title: const Text(
+                title: Text(
                   'Xin chào, Admin!',
                   style: TextStyle(
                       fontWeight: FontWeight.w700, color: kPrimaryColor),
                 ),
-                subtitle: const Text(
+                subtitle: Text(
                   'Admin@gmail.com',
                   style: TextStyle(color: kSecondaryColor),
                 ),
                 trailing: GestureDetector(
                   onTap: () {
+                    debugPrint(homeController.user.value.name);
+                    var token = GetStorage();
+                    debugPrint("TokenLogout: ${token.read("token")}");
                     ConfirmDialog(
                       //context,
                       'Xác nhận',
                       'Bạn chắc chắn muốn đăng xuất?',
                       () {
                         AppPages.routes;
-                        Get.offAndToNamed(AppPages.getLogin());
+                        Get.offAllNamed(AppPages.getLogin());
+                        // Get.offAndToNamed(AppPages.getLogin());
+                        //token.remove('token');
                       },
                       () {},
                     ).show();
@@ -122,6 +130,7 @@ class _HomeViewState extends State<HomeView> {
                   ),
                 ),
               ),
+
               //clock and calendar
               DateAndTime(),
               SizedBox(

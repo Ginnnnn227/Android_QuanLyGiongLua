@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:qlgl_project/core/controllers/register.controller.dart';
+import 'package:qlgl_project/core/views/register/register.controller.dart';
 
 import 'body_register.dart';
 

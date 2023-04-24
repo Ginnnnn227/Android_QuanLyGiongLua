@@ -233,34 +233,45 @@ class _TinhTrangListViewState extends State<TinhTrangListView> {
                 }
               },
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.cyan,
-                  minimumSize: const Size.fromHeight(60)),
-              onPressed: () {
-                DTTTlistController.showCreateDialog();
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Icon(
-                    Icons.add_circle_outline,
-                    size: 30,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    "Thêm mới".toUpperCase(),
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-            ),
+            // ElevatedButton(
+            //   style: ElevatedButton.styleFrom(
+            //       backgroundColor: Colors.cyan,
+            //       minimumSize: const Size.fromHeight(60)),
+            //   onPressed: () {
+            //     DTTTlistController.showCreateDialog();
+            //   },
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.center,
+            //     crossAxisAlignment: CrossAxisAlignment.center,
+            //     children: <Widget>[
+            //       Icon(
+            //         Icons.add_circle_outline,
+            //         size: 30,
+            //       ),
+            //       SizedBox(
+            //         width: 10,
+            //       ),
+            //       Text(
+            //         "Thêm mới".toUpperCase(),
+            //         style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            //       ),
+            //     ],
+            //   ),
+            // ),
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          DTTTlistController.showCreateDialog();
+        },
+        icon: const Icon(Icons.add_circle_outline),
+        label: const Text(
+          'Thêm mới',
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

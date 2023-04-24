@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'core/controllers/dacdiemtinhtrang_list.controller.dart';
 import 'core/navbar/bottom_navbar.controller.dart';
 
 import 'core/constant/color.const.dart';
 import 'core/controllers/doituongtinhtrang_list.controller.dart';
-import 'core/controllers/field_list.controller.dart';
 import 'core/controllers/giaidoantruongthanh_list.controller.dart';
 import 'core/controllers/giong_list.controller.dart';
 import 'core/controllers/kieuhinh_list.controller.dart';
 import 'core/controllers/nhomgiong_list.controller.dart';
-import 'core/controllers/ptn_list.controller.dart';
 import 'core/routes.dart';
 
-void main() {
+void main() async{
+  await GetStorage.init();
   WidgetsFlutterBinding.ensureInitialized();
 
   // SystemUiOverlayStyle systemUiOverlayStyle = const SystemUiOverlayStyle(

@@ -7,11 +7,11 @@ import '../controllers/nhomgiong_list.controller.dart';
 
 
 class BottomNavbarController extends GetxController {
-  var tabIndex = 0;
+  var tabIndex;
   @override
   void onInit(){
     super.onInit();
-    tabIndex = 0;
+    //tabIndex = 0;
   }
   void changeTabIndex(int index) {
     tabIndex = index;

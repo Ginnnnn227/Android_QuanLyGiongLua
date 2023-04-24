@@ -1,6 +1,6 @@
 // ignore_for_file: unnecessary_brace_in_string_interps, constant_identifier_names
 
-const ip = "192.168.1.6";
+const ip = "192.168.1.8";
 //const ip = "127.0.0.1";
 const port = 88;
 const baseURL = 'http://${ip}:${port}/api/';
@@ -18,6 +18,18 @@ const giaidoantruongthanhURL = '${baseURL}giaidoantruongthanhs';
 const doituongtinhtrangURL = '${baseURL}doituongtinhtrangs';
 const dacdiemtinhtrangURL = '${baseURL}dacdiemtinhtrangs';
 const giatritinhtrangURL = '${baseURL}giatritinhtrangs';
+
+const loaigiatridoURL = '${baseURL}loaigiatrido';
+
+const chitieungoaidongURL = '${baseURL}chitieungoaidongs';
+const giatridongoaidongURL = '${baseURL}giatridongoaidongs';
+
+const chitieutrongnhaURL = '${baseURL}chitieutrongnhas';
+const giatridotrongnhaURL = '${baseURL}giatridotrongnha';
+
+const loaisaubenhURL = '${baseURL}loaisaubenhs';
+const chitieusaubenhURL = '${baseURL}chitieusaubenhs';
+const giatridosaubenhURL = '${baseURL}giatridosaubenhs';
 //-----------AUTH-------------------------
 const user_authURL = '${baseURL}auth/user';
 const login_authURL = '${baseURL}auth/login';

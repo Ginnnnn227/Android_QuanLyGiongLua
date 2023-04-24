@@ -1,11 +1,14 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:get/get.dart';
+import 'package:qlgl_project/core/views/datainput_page/chitieungoaidong_list.view.dart';
 
 import 'navbar/bottom_navbar/bottom_navbar.view.dart';
 
+import 'views/datainput_page/chitieungoaidong_add.dart';
+import 'views/datainput_page/chitieungoaidong_edit.dart';
 import 'views/home/home.view.dart';
-import 'views/login/login.view.dart';
+import 'views/auth/login/login.view.dart';
 import 'views/register/register.view.dart';
 
 import 'views/profile/profile.view.dart';
@@ -45,6 +48,10 @@ class AppPages {
 
     GetPage(name: tinhtranglist, page: ()=>TinhTrangListView()),
     GetPage(name: tinhtrangdetail, page: ()=>TinhTrangDetailView()),
+
+    GetPage(name: chitieungoaidonglist, page: ()=>ChitieungoaidongListView()),
+    GetPage(name: chitieungoaidongedit, page: ()=>ChitieungoaidongEditView()),
+    GetPage(name: chitieungoaidongadd, page: ()=>ChitieungoaidongAddView()),
   ];
   //---------------------------------------------
   static getLogin() => login;
@@ -64,6 +71,10 @@ class AppPages {
 
   static getTinhTrangList() => TinhTrangListView();
   static getTinhTrangDetail() => TinhTrangDetailView();
+
+  static getChiTieuNgoaiDongList()=> ChitieungoaidongListView();
+  static getChiTieuNgoaiDongEdit()=> ChitieungoaidongEditView();
+  static getChiTieuNgoaiDongAdd()=> ChitieungoaidongAddView();
   //----------------------------------------------
   static String login = '/login';
   static String register = '/register';
@@ -82,6 +93,10 @@ class AppPages {
 
   static String tinhtranglist = '/tinhtranglist';
   static String tinhtrangdetail = '/tinhtrangdetail';
+
+  static String chitieungoaidonglist = '/chitieungoaidonglist';
+  static String chitieungoaidongedit = '/chitieungoaidongedit';
+  static String chitieungoaidongadd = '/chitieungoaidongadd';
   // static var list = [
   //   GetPage(
   //     name: AppRoutes.login,

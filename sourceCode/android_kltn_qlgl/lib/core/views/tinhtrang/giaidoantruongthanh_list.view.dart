@@ -74,6 +74,7 @@ class _GDTTListViewState extends State<GDTTListView> {
                 ),
               ),
             ),
+            // so luong
             Obx(() {
               return Text(
                 "Số lượng: ${numberCustom10(GDTTlistController.filteredData.length)}",
@@ -136,33 +137,38 @@ class _GDTTListViewState extends State<GDTTListView> {
                 );
               }
             }),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.cyan,
-                  minimumSize: const Size.fromHeight(60)),
-              onPressed: () => GDTTlistController.showCreateProductDialog(),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Icon(Icons.add_circle_outline,size: 30,),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    "Thêm mới".toUpperCase(),
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-            ),
+            // ElevatedButton(
+            //   style: ElevatedButton.styleFrom(
+            //     backgroundColor: Colors.cyan,
+            //       minimumSize: const Size.fromHeight(60)),
+            //   onPressed: () => GDTTlistController.showCreateProductDialog(),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.center,
+            //     crossAxisAlignment: CrossAxisAlignment.center,
+            //     children: <Widget>[
+            //       Icon(Icons.add_circle_outline,size: 30,),
+            //       SizedBox(
+            //         width: 10,
+            //       ),
+            //       Text(
+            //         "Thêm mới".toUpperCase(),
+            //         style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            //       ),
+            //     ],
+            //   ),
+            // ),
           ],
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () => GDTTlistController.showCreateProductDialog(),
-      //   child: Icon(Icons.add),
-      // ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () => GDTTlistController.showCreateProductDialog(),
+        icon: const Icon(Icons.add_circle_outline),
+        label: const Text(
+          'Thêm mới',
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 

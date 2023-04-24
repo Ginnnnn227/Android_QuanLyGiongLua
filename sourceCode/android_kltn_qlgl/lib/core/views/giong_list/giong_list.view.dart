@@ -29,6 +29,7 @@ showImage() {
         //'http://localhost:80/quanlyluagiong/storage/app/${item.giongHinhanh}',
         fit: BoxFit.cover,
         scale: 1.0,
+        //"https://via.placeholder.com/600/24f355",
         "https://trungtamphantichchungnhanhanoi.gov.vn/wp-content/uploads/2021/12/Giong-lua-lai-KC06-1.jpg",
         height: 50,
       ),

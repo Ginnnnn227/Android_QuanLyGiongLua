@@ -15,8 +15,8 @@ class CustomTextFormField extends StatefulWidget {
   }) : super(key: key);
   final String label;
   final String hint;
-  final IconData pIcon;
-  final TextInputType keyType;
+  final IconData? pIcon;
+  final TextInputType? keyType;
   final TextEditingController controller;
 
   @override
@@ -49,7 +49,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         hintText: widget.hint,
         hintStyle: TextStyle(fontSize: 16, color: Colors.grey.shade400),
         prefixIcon: CustomPrefixIcon(
-          icon: widget.pIcon,
+          icon: widget.pIcon!,
         ),
         suffixIcon:
             (widget.label == 'Mật khẩu' || widget.label == 'Xác nhận mật khẩu')

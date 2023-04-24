@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:qlgl_project/core/navbar/bottom_navbar.controller.dart';
+import 'package:qlgl_project/core/views/datainput_page/datainput_page.view.dart';
 import 'package:qlgl_project/core/views/home/home.view.dart';
 import 'package:qlgl_project/core/views/profile/profile.view.dart';
 
@@ -19,10 +20,11 @@ class BottomNavbarView extends StatefulWidget {
 
 class _BottomNavbarViewState extends State<BottomNavbarView> {
   BottomNavbarController controller = Get.find();
+  
   @override
   void initState() {
     // TODO: implement initState
-    controller.tabIndex=0;
+    //controller.tabIndex=0;
   }
   @override
   Widget build(BuildContext context) {
@@ -59,10 +61,7 @@ class _BottomNavbarViewState extends State<BottomNavbarView> {
               index: controller.tabIndex,
               children: [
                 const HomeView(),
-                Container(
-                  color: Colors.blue,
-                  child: const Text('OtherPage'),
-                ),
+                DataInputView(),
                 const ProfileView(),
               ],
             ),
