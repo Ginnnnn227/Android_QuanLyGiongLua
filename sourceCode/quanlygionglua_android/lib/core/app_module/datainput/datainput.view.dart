@@ -11,7 +11,7 @@ class _DataInputScreenState extends State<DataInputScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Nhập dữ liệu")),
+      appBar: AppBar(title: const Text("Nhập dữ liệu")),
     );
   }
 }

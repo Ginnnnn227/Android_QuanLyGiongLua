@@ -4,7 +4,7 @@ class loaigiatridoModel {
   int? _id;
   String? _loaigiatridoTen;
   String? _loaigiatridoDonVi;
-  String? _phanLoai;
+  int? _phanLoai;
   String? _createdAt;
   String? _updatedAt;
 
@@ -12,7 +12,7 @@ class loaigiatridoModel {
     int? id,
     String? loaigiatridoTen,
     String? loaigiatridoDonVi,
-    String? phanLoai,
+    int? phanLoai,
     String? createdAt,
     String? updatedAt
   }){
@@ -39,14 +39,14 @@ class loaigiatridoModel {
   int? get id => _id;
   String? get loaigiatridoTen => _loaigiatridoTen;
   String? get loaigiatridoDonVi => _loaigiatridoDonVi;
-  String? get phanLoai => _phanLoai;
+  int? get phanLoai => _phanLoai;
   String? get createdAt => _createdAt;
   String? get updatedAt => _updatedAt;
 
   //set id(int? id) => _id = id;
   set loaigiatridoTen(String? loaigiatridoTen) => _loaigiatridoTen = loaigiatridoTen;
   set loaigiatridoDonVi(String? loaigiatridoDonVi) => _loaigiatridoDonVi = loaigiatridoDonVi;
-  set phanLoai(String? phanLoai) => _phanLoai = phanLoai;
+  set phanLoai(int? phanLoai) => _phanLoai = phanLoai;
   // set createdAt(String? createdAt) => _createdAt = createdAt;
   // set updatedAt(String? updatedAt) => _updatedAt = updatedAt;
 

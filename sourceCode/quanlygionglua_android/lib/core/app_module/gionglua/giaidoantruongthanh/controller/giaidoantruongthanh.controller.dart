@@ -1,12 +1,15 @@
+// ignore_for_file: unnecessary_overrides
+
 import 'dart:async';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:qlgl_project/core/constant/apiurl.const.dart';
 
 import '../../../../models/giaidoantruongthanh.model.dart';
 
-class GiaiDoanTruongThanhController extends GetxController{
+class GiaiDoanTruongThanhController extends GetxController {
   RxBool isLoading = true.obs;
   RxList<giaidoantruongthanhModel> data = RxList<giaidoantruongthanhModel>([]);
   RxString search = ''.obs;
@@ -16,9 +19,8 @@ class GiaiDoanTruongThanhController extends GetxController{
       return data.toList();
     } else {
       return data
-          .where((item) => item.gdttMota!
-              .toLowerCase()
-              .contains(search.value.toLowerCase()))
+          .where((item) =>
+              item.gdttMota!.toLowerCase().contains(search.value.toLowerCase()))
           .toList();
     }
   }
@@ -35,8 +37,9 @@ class GiaiDoanTruongThanhController extends GetxController{
         throw TimeoutException("Connect time out try again");
       });
       final List<dynamic> responseData = response.data['data'];
-      final List<giaidoantruongthanhModel> sorted =
-          responseData.map((post) => giaidoantruongthanhModel.fromJson(post)).toList();
+      final List<giaidoantruongthanhModel> sorted = responseData
+          .map((post) => giaidoantruongthanhModel.fromJson(post))
+          .toList();
       sorted.sort((a, b) => a.gdttTen!.compareTo(b.gdttTen!));
       data.value = sorted;
       // final List<kieuhinhModel> list = [];
@@ -56,19 +59,24 @@ class GiaiDoanTruongThanhController extends GetxController{
   }
 
   @override
-  void onInit() async{
+  void onInit() async {
+    await EasyLoading.show(status: 'Loading...');
     super.onInit();
     await fetchData();
     search.value = '';
+    EasyLoading.dismiss();
   }
+
   @override
   void onReady() {
     super.onReady();
   }
+
   @override
   void dispose() {
     super.dispose();
   }
+
   @override
   void onClose() {
     super.onClose();

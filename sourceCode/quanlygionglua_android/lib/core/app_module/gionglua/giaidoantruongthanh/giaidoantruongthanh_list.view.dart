@@ -1,10 +1,10 @@
+// ignore_for_file: non_constant_identifier_names, unused_local_variable, prefer_is_empty
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:qlgl_project/core/app_module/gionglua/kieuhinh/controller/kieuhinh.controller.dart';
 
 import '../../../constant/color.const.dart';
 import '../../../constant/function/funtion.dart';
-import '../../../models/giaidoantruongthanh.model.dart';
 import 'controller/giaidoantruongthanh.controller.dart';
 
 class GiaiDoanTruongThanhListScreen extends StatefulWidget {
@@ -45,20 +45,15 @@ class _GiaiDoanTruongThanhListScreenState
       appBar: AppBar(
         title: Text(
           'Giai đoạn trưởng thành'.toUpperCase(),
-          style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 22),
+          style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
         ),
-        // actions: [
-        //   IconButton(
-        //       onPressed: () {
-        //         setState(() {
-        //           NGlistController.fetchData();
-        //           NGlistController.search.value = '';
-        //           AppPages.routes;
-        //           Get.reset();
-        //         });
-        //       },
-        //       icon: Icon(Icons.refresh_outlined))
-        // ],
+        actions: [
+          IconButton(
+              onPressed: () {
+                _loadpage();
+              },
+              icon: const Icon(Icons.refresh_outlined))
+        ],
         centerTitle: true,
       ),
       body: RefreshIndicator(
@@ -108,7 +103,7 @@ class _GiaiDoanTruongThanhListScreenState
                 } else {
                   final item = GDTTlistController.filteredData;
                   return GDTTlistController.filteredData.length != 0
-                      ? Container(child: Expanded(child: TableData()))
+                      ? Expanded(child: TableData())
                       : const Text(
                           'Không có dữ liệu',
                           style: TextStyle(
@@ -166,19 +161,23 @@ class _GiaiDoanTruongThanhListScreenState
           .map(
             (i) => DataRow(
               cells: [
-                DataCell(Text(
-                  i.gdttTen!,
-                  style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.cyan,
-                      fontWeight: FontWeight.w800),
-                )),
+                DataCell(
+                  Center(
+                    child: Text(
+                      i.gdttTen!,
+                      style: const TextStyle(
+                          fontSize: 18,
+                          color: Colors.cyan,
+                          fontWeight: FontWeight.w800),
+                    ),
+                  ),
+                ),
                 DataCell(
                   Text(
                     i.gdttMota!,
                     softWrap: true,
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 18, color: Colors.black),
+                    style: const TextStyle(fontSize: 18, color: Colors.black),
                   ),
                 ),
               ],

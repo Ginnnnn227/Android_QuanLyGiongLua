@@ -26,7 +26,7 @@ void main() async {
 }
 void configLoading() {
   EasyLoading.instance
-    ..displayDuration = const Duration(seconds: 1)
+    ..displayDuration = const Duration(seconds: 10)
     ..indicatorType = EasyLoadingIndicatorType.fadingCircle
     ..loadingStyle = EasyLoadingStyle.dark
     ..indicatorSize = 30.0

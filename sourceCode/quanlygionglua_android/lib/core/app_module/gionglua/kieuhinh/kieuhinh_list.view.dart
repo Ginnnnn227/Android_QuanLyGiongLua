@@ -1,4 +1,7 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:qlgl_project/core/app_module/gionglua/kieuhinh/controller/kieuhinh.controller.dart';
 
@@ -22,6 +25,7 @@ class _KieuHinhListScreenState extends State<KieuHinhListScreen> {
     setState(() {
       KHlistController.onInit();
     });
+        EasyLoading.dismiss();
   }
 
   Future<void> _loadpage() async {
@@ -88,20 +92,20 @@ class _KieuHinhListScreenState extends State<KieuHinhListScreen> {
             Obx(() {
               return Text(
                 "Số lượng: ${numberCustom10(KHlistController.filteredData.length)}",
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
                     color: kPrimaryColor),
               );
             }),
-            Divider(),
+            const Divider(),
             Obx(() {
               if (KHlistController.isLoading.value) {
                 return const Center(
                   child: CircularProgressIndicator(),
                 );
               } else {
-                return KHlistController.filteredData.length != 0
+                return KHlistController.filteredData.isNotEmpty
                     ? Expanded(
                         child: ListView.builder(
                           itemCount: KHlistController.filteredData.length,

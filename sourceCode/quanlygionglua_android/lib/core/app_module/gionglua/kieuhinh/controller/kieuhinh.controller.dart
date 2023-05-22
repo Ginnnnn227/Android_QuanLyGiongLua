@@ -1,12 +1,15 @@
+// ignore_for_file: unnecessary_overrides
+
 import 'dart:async';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
 import '../../../../constant/apiurl.const.dart';
 import '../../../../models/kieuhinh.model.dart';
 
-class KieuHinhController extends GetxController{
+class KieuHinhController extends GetxController {
   RxBool isLoading = true.obs;
   RxList<kieuhinhModel> data = RxList<kieuhinhModel>([]);
   RxString search = ''.obs;
@@ -56,19 +59,25 @@ class KieuHinhController extends GetxController{
   }
 
   @override
-  void onInit() async{
+  void onInit() async {
+    await EasyLoading.show(status: 'Loading...');
     super.onInit();
     await fetchData();
     search.value = '';
+    EasyLoading.dismiss();
+    
   }
+
   @override
   void onReady() {
     super.onReady();
   }
+
   @override
   void dispose() {
     super.dispose();
   }
+
   @override
   void onClose() {
     super.onClose();

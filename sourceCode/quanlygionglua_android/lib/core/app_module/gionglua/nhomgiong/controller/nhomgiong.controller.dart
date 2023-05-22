@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
 import '../../../../constant/apiurl.const.dart';
@@ -55,21 +56,25 @@ class NhomGiongController extends GetxController {
     update();
   }
 
-
   @override
-  void onInit() async{
+  void onInit() async {
+    await EasyLoading.show(status: 'Loading...');
     super.onInit();
     await fetchData();
     search.value = '';
+    EasyLoading.dismiss();
   }
+
   @override
   void onReady() {
     super.onReady();
   }
+
   @override
   void dispose() {
     super.dispose();
   }
+
   @override
   void onClose() {
     super.onClose();

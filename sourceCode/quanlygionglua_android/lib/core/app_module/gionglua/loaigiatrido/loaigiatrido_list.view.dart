@@ -1,6 +1,10 @@
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../constant/color.const.dart';
+import '../../../constant/function/funtion.dart';
+import '../../../models/loaigiatrido.model.dart';
 import 'controller/loaigiatrido.controller.dart';
 
 class LoaiGiaTriDoListScreen extends StatefulWidget {
@@ -11,7 +15,16 @@ class LoaiGiaTriDoListScreen extends StatefulWidget {
 }
 
 class _LoaiGiaTriDoListScreenState extends State<LoaiGiaTriDoListScreen> {
-  var LGTDlistController = Get.find<LoaiGiaTriDoController>();
+  var LGTDlistController = Get.put(LoaiGiaTriDoController());
+
+  final List<Tab> myTabs = <Tab>[
+    Tab(
+      text: 'Ngoài đồng'.toUpperCase(),
+    ),
+    Tab(
+      text: 'Trong nhà'.toUpperCase(),
+    )
+  ];
 
   @override
   void initState() {
@@ -22,6 +35,7 @@ class _LoaiGiaTriDoListScreenState extends State<LoaiGiaTriDoListScreen> {
   }
 
   Future<void> _loadpage() async {
+    
     setState(() {
       LGTDlistController.onInit();
     });
@@ -30,6 +44,7 @@ class _LoaiGiaTriDoListScreenState extends State<LoaiGiaTriDoListScreen> {
         PageRouteBuilder(
             pageBuilder: (a, b, c) => const LoaiGiaTriDoListScreen(),
             transitionDuration: const Duration(seconds: 5)));
+
   }
 
   @override
@@ -41,7 +56,109 @@ class _LoaiGiaTriDoListScreenState extends State<LoaiGiaTriDoListScreen> {
           style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 22),
         ),
         centerTitle: true,
+        actions: [
+          IconButton(
+              onPressed: () {
+                _loadpage();
+              },
+              icon: Icon(Icons.refresh_outlined))
+        ],
       ),
+      body: DefaultTabController(
+        length: myTabs.length,
+        child: Column(
+          children: <Widget>[
+            TabBar(
+              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+              // indicatorColor: Colors.cyan,
+              indicatorWeight: 1,
+              indicator: BoxDecoration(
+                  borderRadius: BorderRadius.circular(40), color: Colors.cyan),
+              labelColor: Colors.white,
+              labelStyle: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+              ),
+              unselectedLabelColor: Colors.grey,
+              tabs: myTabs,
+              onTap: (index) {
+                LGTDlistController.phanloai.value = index == 0 ? 1 : 2;
+              },
+            ),
+            Obx(() {
+              return Text(
+                "Số lượng: ${numberCustom10(LGTDlistController.phanloai.value == 1 ? LGTDlistController.filteredData1.length : LGTDlistController.filteredData2.length)}",
+                style: const TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  color: kPrimaryColor,
+                ),
+              );
+            }),
+            const Divider(),
+            Expanded(
+              child: Obx(
+                () {
+                  if (LGTDlistController.isLoading.value) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else {
+                    return TabBarView(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: buildTable(LGTDlistController.filteredData1),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: buildTable(LGTDlistController.filteredData2),
+                        ),
+                      ],
+                    );
+                  }
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildTable(List<loaigiatridoModel> datalist) {
+    return DataTable(
+      border: TableBorder.all(width: 1, color: Colors.cyan),
+      columnSpacing: 0,
+      headingRowColor:
+          MaterialStateProperty.all<Color>(Colors.cyan.withOpacity(1)),
+      headingTextStyle:
+          const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      columns: <DataColumn>[
+        DataColumn(label: Text('Tên loại giá trị đo'.toUpperCase())),
+        DataColumn(
+          label: Text(
+            'Đơn vị'.toUpperCase(),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ],
+      rows: datalist
+          .map(
+            (item) => DataRow(
+              cells: [
+                DataCell(Text(item.loaigiatridoTen!)),
+                DataCell(
+                  Center(
+                    child: Text(
+                      item.loaigiatridoDonVi!,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          )
+          .toList(),
     );
   }
 }

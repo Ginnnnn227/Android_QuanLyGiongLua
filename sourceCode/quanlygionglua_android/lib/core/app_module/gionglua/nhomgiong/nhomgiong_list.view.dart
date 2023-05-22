@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:qlgl_project/core/app_module/gionglua/nhomgiong/nhomgiong.bingding.dart';
 
@@ -27,6 +28,7 @@ class _NhomGiongListScreenState extends State<NhomGiongListScreen> {
   }
 
   Future<void> _loadpage() async {
+    
     setState(() {
       NGlistController.onInit();
       // NGlistController.fetchData();
@@ -37,6 +39,7 @@ class _NhomGiongListScreenState extends State<NhomGiongListScreen> {
         PageRouteBuilder(
             pageBuilder: (a, b, c) => const NhomGiongListScreen(),
             transitionDuration: const Duration(seconds: 5)));
+
   }
 
   @override
