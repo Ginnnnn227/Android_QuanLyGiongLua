@@ -25,7 +25,6 @@ class _KieuHinhListScreenState extends State<KieuHinhListScreen> {
     setState(() {
       KHlistController.onInit();
     });
-        EasyLoading.dismiss();
   }
 
   Future<void> _loadpage() async {
@@ -46,10 +45,32 @@ class _KieuHinhListScreenState extends State<KieuHinhListScreen> {
     // });
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'KIỂU HÌNH GIỐNG LÚA',
-          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 22),
+        title: Text(
+          'Kiểu hình giống lúa'.toUpperCase(),
+          style: TextStyle(
+              color: kPrimaryColor, fontWeight: FontWeight.w600, fontSize: 20),
         ),
+        backgroundColor: Colors.white,
+        shadowColor: Colors.white,
+        //elevation: 0,
+
+        leadingWidth: 56,
+        leading: BackButton(
+          color: kPrimaryColor,
+          onPressed: () {
+            Get.back();
+          },
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: IconButton(
+                onPressed: () {
+                  _loadpage();
+                },
+                icon: const Icon(Icons.refresh_outlined, color: kPrimaryColor)),
+          )
+        ],
         // actions: [
         //   IconButton(
         //       onPressed: () {
@@ -95,36 +116,52 @@ class _KieuHinhListScreenState extends State<KieuHinhListScreen> {
                 style: const TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
-                    color: kPrimaryColor),
+                    color: Colors.cyan),
               );
             }),
             const Divider(),
-            Obx(() {
-              if (KHlistController.isLoading.value) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else {
-                return KHlistController.filteredData.isNotEmpty
-                    ? Expanded(
-                        child: ListView.builder(
-                          itemCount: KHlistController.filteredData.length,
-                          itemBuilder: (context, index) {
-                            final item = KHlistController.filteredData[index];
-                            return cardItemKH(index, item);
-                          },
-                        ),
-                      )
-                    : const Text(
-                        'Không có dữ liệu',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: kSecondaryColor,
-                        ),
-                      );
-              }
-            }),
+            Obx(
+              () {
+                if (KHlistController.isLoading.value) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else {
+                  return KHlistController.filteredData.isNotEmpty
+                      ? Expanded(
+                          child: ListView.builder(
+                            itemCount: KHlistController.filteredData.length,
+                            itemBuilder: (context, index) {
+                              final item = KHlistController.filteredData[index];
+                              return cardItemKH(index, item);
+                            },
+                          ),
+                        )
+                      : Column(
+                          children: [
+                            Text(
+                              'Chưa có dữ liệu',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: kSecondaryColor,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            Text(
+                              '${KHlistController.search}',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: kPrimaryColor,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        );
+                }
+              },
+            ),
           ],
         ),
       ),

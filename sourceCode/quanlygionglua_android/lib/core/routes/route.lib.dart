@@ -1,15 +1,27 @@
 import 'package:get/get.dart';
+import 'package:qlgl_project/core/app_module/datainput/chitieungoaidong_edit.dart';
+import 'package:qlgl_project/core/app_module/datainput/chitieungoaidong_list.view.dart';
+import 'package:qlgl_project/core/app_module/datainput/datainput_page.view.dart';
 import 'package:qlgl_project/core/app_module/gionglua/loaigiatrido/loaigiatrido_list.view.dart';
+import 'package:qlgl_project/core/app_module/gionglua/loaisaubenh/loaisaubenh.bingding.dart';
+import 'package:qlgl_project/core/app_module/gionglua/loaisaubenh/loaisaubenh_list.view.dart';
 import 'package:qlgl_project/core/app_module/gionglua/nhomgiong/nhomgiong_list.view.dart';
 import 'package:qlgl_project/core/app_module/login/login_screen.view.dart';
 import 'package:qlgl_project/core/app_module/navbar/bottom_navbar.view.dart';
 import 'package:qlgl_project/core/app_module/splash/splash_screen.view.dart';
 
+import '../app_module/datainput/bingding/bingding.dart';
+import '../app_module/datainput/chitieungoaidong_add.dart';
 import '../app_module/gionglua/giaidoantruongthanh/giaidoantruongthanh.bingding.dart';
 import '../app_module/gionglua/giaidoantruongthanh/giaidoantruongthanh_list.view.dart';
+import '../app_module/gionglua/giong/giong.bingding.dart';
+import '../app_module/gionglua/giong/giong_detail.view.dart';
+import '../app_module/gionglua/giong/giong_list.view.dart';
 import '../app_module/gionglua/kieuhinh/kieuhinh.bingding.dart';
 import '../app_module/gionglua/kieuhinh/kieuhinh_list.view.dart';
 import '../app_module/gionglua/loaigiatrido/loaigiatrido.bingding.dart';
+import '../app_module/gionglua/loaisaubenh/loaisaubenh_add.view.dart';
+import '../app_module/gionglua/loaisaubenh/loaisaubenh_detail.view.dart';
 import '../app_module/gionglua/nhomgiong/nhomgiong.bingding.dart';
 import '../app_module/home/home.bingding.dart';
 import '../app_module/home/home_screen.view.dart';

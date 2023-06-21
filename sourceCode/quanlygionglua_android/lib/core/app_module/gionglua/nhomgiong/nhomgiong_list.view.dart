@@ -28,7 +28,6 @@ class _NhomGiongListScreenState extends State<NhomGiongListScreen> {
   }
 
   Future<void> _loadpage() async {
-    
     setState(() {
       NGlistController.onInit();
       // NGlistController.fetchData();
@@ -39,7 +38,6 @@ class _NhomGiongListScreenState extends State<NhomGiongListScreen> {
         PageRouteBuilder(
             pageBuilder: (a, b, c) => const NhomGiongListScreen(),
             transitionDuration: const Duration(seconds: 5)));
-
   }
 
   @override
@@ -49,10 +47,32 @@ class _NhomGiongListScreenState extends State<NhomGiongListScreen> {
     // });
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'DANH SÁCH NHÓM GIỐNG',
-          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 22),
+        title: Text(
+          'Nhóm giống lúa'.toUpperCase(),
+          style: TextStyle(
+              color: kPrimaryColor, fontWeight: FontWeight.w600, fontSize: 20),
         ),
+        backgroundColor: Colors.white,
+        shadowColor: Colors.white,
+        //elevation: 0,
+
+        leadingWidth: 56,
+        leading: BackButton(
+          color: kPrimaryColor,
+          onPressed: () {
+            Get.back();
+          },
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: IconButton(
+                onPressed: () {
+                  _loadpage();
+                },
+                icon: const Icon(Icons.refresh_outlined, color: kPrimaryColor)),
+          )
+        ],
         // actions: [
         //   IconButton(
         //       onPressed: () {
@@ -98,7 +118,7 @@ class _NhomGiongListScreenState extends State<NhomGiongListScreen> {
                 style: TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.bold,
-                  color: kPrimaryColor,
+                  color: Colors.cyan,
                 ),
               );
             }),

@@ -99,16 +99,16 @@ class _HomeScreenState extends State<HomeScreen> {
                           fontWeight: FontWeight.bold,
                           color: kTextColor02),
                     ),
-                    GestureDetector(
-                      onTap: () {},
-                      child: Text(
-                        'Xem thêm >',
-                        style: TextStyle(
-                            fontSize: SizeConfig.screenWidth / 22,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.blue),
-                      ),
-                    ),
+                    // GestureDetector(
+                    //   onTap: () {},
+                    //   child: Text(
+                    //     'Xem thêm >',
+                    //     style: TextStyle(
+                    //         fontSize: SizeConfig.screenWidth / 22,
+                    //         fontWeight: FontWeight.bold,
+                    //         color: Colors.blue),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
@@ -116,15 +116,25 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: getProportionateScreenHeight(20),
               ),
               //horizontal card item
-              SizedBox(
-                height: 200,
-                //color: Colors.blue,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 5,
-                  itemBuilder: (context, index) => giongluaCardItem(),
-                ),
-              ),
+              buildVertiCard("Giống lúa", () {
+                Get.toNamed(Routes.GIONG_LIST);
+              }, "assets/logo/list.png"),
+              buildVertiCard("Nhóm giống lúa", () {
+                Get.toNamed(Routes.NHOMGIONG_LIST);
+              }, "assets/logo/list.png"),
+              //-------------------
+              buildVertiCard("Kiểu hình giống lúa", () {
+                Get.toNamed(Routes.KIEUHINH_LIST);
+              }, "assets/logo/list.png"),
+              // SizedBox(
+              //   height: 200,
+              //   //color: Colors.blue,
+              //   child: ListView.builder(
+              //     scrollDirection: Axis.horizontal,
+              //     itemCount: 5,
+              //     itemBuilder: (context, index) => giongluaCardItem(),
+              //   ),
+              // ),
               // SizedBox(
               //   height: 150,
               //   //alignment: Alignment.center,
@@ -164,13 +174,6 @@ class _HomeScreenState extends State<HomeScreen> {
               //Vertical card item
               Column(
                 children: <Widget>[
-                  buildVertiCard("Nhóm giống lúa", () {
-                    Get.toNamed(Routes.NHOMGIONG_LIST);
-                  }, "assets/logo/list.png"),
-                  //-------------------
-                  buildVertiCard("Kiểu hình giống lúa", () {
-                    Get.toNamed(Routes.KIEUHINH_LIST);
-                  }, "assets/logo/list.png"),
                   //-------------------
                   buildVertiCard("Giai đoạn trưởng thành", () {
                     Get.toNamed(Routes.GIAIDOANTRUONGTHANH_LIST);
@@ -179,11 +182,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   buildVertiCard("Tính trạng giống lúa", () {},
                       "assets/logo/ricestyle.png"),
                   //-------------------
-                  buildVertiCard("Các loại sâu bệnh", () {},
-                      "assets/logo/caterpillar.png"),
+                  buildVertiCard("Các loại sâu bệnh", () {
+                    Get.toNamed(Routes.LOAISAUBENH_LIST);
+                  }, "assets/logo/caterpillar.png"),
                   //-------------------
-                  buildVertiCard(
-                      "Các loại giá trị đo", () {Get.toNamed(Routes.LOAIGIATRIDO_LIST);}, "assets/logo/measure.png"),
+                  buildVertiCard("Các loại giá trị đo", () {
+                    Get.toNamed(Routes.LOAIGIATRIDO_LIST);
+                  }, "assets/logo/measure.png"),
                 ],
               )
             ],

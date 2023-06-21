@@ -52,17 +52,32 @@ class _LoaiGiaTriDoListScreenState extends State<LoaiGiaTriDoListScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Các giá trị đo'.toUpperCase(),
-          style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 22),
+          'Nhóm giống lúa'.toUpperCase(),
+          style: TextStyle(
+              color: kPrimaryColor, fontWeight: FontWeight.w600, fontSize: 20),
         ),
-        centerTitle: true,
+        backgroundColor: Colors.white,
+        shadowColor: Colors.white,
+        //elevation: 0,
+
+        leadingWidth: 56,
+        leading: BackButton(
+          color: kPrimaryColor,
+          onPressed: () {
+            Get.back();
+          },
+        ),
         actions: [
-          IconButton(
-              onPressed: () {
-                _loadpage();
-              },
-              icon: Icon(Icons.refresh_outlined))
+          Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: IconButton(
+                onPressed: () {
+                  _loadpage();
+                },
+                icon: const Icon(Icons.refresh_outlined, color: kPrimaryColor)),
+          )
         ],
+        centerTitle: true,
       ),
       body: DefaultTabController(
         length: myTabs.length,
@@ -73,7 +88,7 @@ class _LoaiGiaTriDoListScreenState extends State<LoaiGiaTriDoListScreen> {
               // indicatorColor: Colors.cyan,
               indicatorWeight: 1,
               indicator: BoxDecoration(
-                  borderRadius: BorderRadius.circular(40), color: Colors.cyan),
+                  borderRadius: BorderRadius.circular(40), color: kPrimaryColor),
               labelColor: Colors.white,
               labelStyle: const TextStyle(
                 fontSize: 18,
@@ -91,7 +106,7 @@ class _LoaiGiaTriDoListScreenState extends State<LoaiGiaTriDoListScreen> {
                 style: const TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.bold,
-                  color: kPrimaryColor,
+                  color: Colors.cyan,
                 ),
               );
             }),

@@ -44,15 +44,27 @@ class _GiaiDoanTruongThanhListScreenState
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Giai đoạn trưởng thành'.toUpperCase(),
-          style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
+          'giai đoạn trưởng thành'.toUpperCase(),
+          style: TextStyle(
+              color: kPrimaryColor, fontWeight: FontWeight.w600, fontSize: 18),
+        ),
+        backgroundColor: Colors.white,
+        shadowColor: Colors.white,
+        //elevation: 0,
+
+        leadingWidth: 56,
+        leading: BackButton(
+          color: kPrimaryColor,
+          onPressed: () {
+            Get.back();
+          },
         ),
         actions: [
           IconButton(
               onPressed: () {
                 _loadpage();
               },
-              icon: const Icon(Icons.refresh_outlined))
+              icon: const Icon(Icons.refresh_outlined, color: kPrimaryColor))
         ],
         centerTitle: true,
       ),
@@ -89,7 +101,7 @@ class _GiaiDoanTruongThanhListScreenState
                   style: const TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
-                      color: kPrimaryColor),
+                      color: Colors.cyan),
                 ),
               );
             }),
@@ -104,13 +116,27 @@ class _GiaiDoanTruongThanhListScreenState
                   final item = GDTTlistController.filteredData;
                   return GDTTlistController.filteredData.length != 0
                       ? Expanded(child: TableData())
-                      : const Text(
-                          'Không có dữ liệu',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: kSecondaryColor,
-                          ),
+                      : Column(
+                          children: [
+                            Text(
+                              'Chưa có dữ liệu sâu bệnh',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: kSecondaryColor,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            Text(
+                              '${GDTTlistController.search}',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: kPrimaryColor,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
                         );
                 }
               },

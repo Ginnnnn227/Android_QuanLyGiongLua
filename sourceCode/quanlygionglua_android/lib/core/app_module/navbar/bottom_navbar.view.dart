@@ -2,11 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:qlgl_project/core/app_module/datainput/datainput.view.dart';
 import 'package:qlgl_project/core/app_module/home/home_screen.view.dart';
 import 'package:qlgl_project/core/app_module/profile/profile.view.dart';
 
 import '../../constant/color.const.dart';
+import '../datainput/datainput_page.view.dart';
 import 'controller/bottom_navbar.controller.dart';
 
 class BottomNavbarView extends StatefulWidget {
