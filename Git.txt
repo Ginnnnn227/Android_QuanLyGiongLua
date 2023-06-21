@@ -13,3 +13,15 @@ XÓA THƯ MỤC TRÊN KHO GIT:
 git rm -r --cached FolderName
 git commit -m "Removed folder from repository"
 git push origin master
+
+Cloning laravel project from github
+1.Run git clone <my-cool-project>
+2.Run composer install
+3.Run cp .env.example .env
+4.Run php artisan key:generate
+composer require laravel/passport
+5.Run php artisan migrate
+Run php artisan db:seed --class=tenfile (PermissionTableSeeder và CreateAdminUserSeeder, DatabaseSeeder)
+php artisan passport:install
+6.Run php artisan serve
+7.Go to link localhost:8000
